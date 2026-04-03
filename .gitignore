@@ -1,0 +1,15 @@
+# 1. Virtual Environment (Crucial - prevents the "Fatal error in launcher")
+RAG312/
+
+# 2. Python Internals
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 3. Data & Results (Prevents large binary files from slowing down Git)
+sample_data/
+results/
+
+# 4. OS/IDE Specific
+.vscode/
+.DS_Store

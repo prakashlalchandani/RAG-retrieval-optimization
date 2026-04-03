@@ -4,3 +4,6 @@ rank-bm25
 pypdf
 numpy
 scikit-learn
+fastapi
+unicorn
+python-dotenv
