@@ -13,7 +13,6 @@ def build_faiss_index(embeddings):
 
     return index
 
-
-def search(index, query_embedding, top_k=3):
+def search(index, query_embedding, top_k=8):
     distances, indices = index.search(query_embedding, top_k)
     return indices

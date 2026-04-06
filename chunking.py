@@ -9,12 +9,34 @@ def extract_text(pdf_path):
 
     return text
 
-def create_chunks(text, chunk_size=300):
-    words = text.split()
+def create_chunks(text):
+
+    lines = text.split("\n")
+
     chunks = []
 
-    for i in range(0, len(words), chunk_size):
-        chunk = " ".join(words[i:i+chunk_size])
-        chunks.append(chunk)
+    buffer = ""
+
+    for line in lines:
+
+        line = line.strip()
+
+        if not line:
+            continue
+
+        # if line looks like structured field → keep separately
+        if ":" in line or len(line) < 80:
+
+            if buffer:
+                chunks.append(buffer.strip())
+                buffer = ""
+
+            chunks.append(line)
+
+        else:
+            buffer += " " + line
+
+    if buffer:
+        chunks.append(buffer.strip())
 
     return chunks
