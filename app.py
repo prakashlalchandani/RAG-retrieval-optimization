@@ -13,6 +13,7 @@ from hybrid_search import (
     numeric_boost_search,
 )
 from evaluation import check_retrieval
+from query_transforms import HYDE_CONFIG, text_for_retrieval
 
 
 app = FastAPI(title="RAG Retrieval Optimization API")
@@ -74,7 +75,8 @@ def search_query(query: str):
     if index is None:
         return {"error": "Upload a PDF first."}
 
-    query_embedding = model.encode([query.lower()])
+    retrieval_text, used_hyde, hyde_error = text_for_retrieval(query.lower())
+    query_embedding = model.encode([retrieval_text])
 
     vector_results = list(search(index, query_embedding)[0])
 
@@ -92,6 +94,9 @@ def search_query(query: str):
     return {
         "query": query,
         "results": retrieved_chunks,
+        "hyde_enabled": HYDE_CONFIG.enabled,
+        "hyde_used": used_hyde,
+        "hyde_fallback_reason": hyde_error,
     }
 
 
@@ -142,7 +147,8 @@ def evaluate_system():
 
     for query, expected_answer in expected_answers.items():
 
-        query_embedding = model.encode([query.lower()])
+        retrieval_text, used_hyde, hyde_error = text_for_retrieval(query.lower())
+        query_embedding = model.encode([retrieval_text])
 
         vector_results = list(search(index, query_embedding)[0])
 
@@ -164,6 +170,8 @@ def evaluate_system():
                 "query": query,
                 "expected": expected_answer,
                 "match_found": match,
+                "hyde_used": used_hyde,
+                "hyde_fallback_reason": hyde_error,
             }
         )
 
@@ -175,4 +183,5 @@ def evaluate_system():
     return {
         "accuracy": accuracy,
         "details": results_summary,
+        "hyde_enabled": HYDE_CONFIG.enabled,
     }

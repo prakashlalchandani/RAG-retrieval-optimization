@@ -3,6 +3,7 @@ from embeddings import create_embeddings, model
 from vector_store import build_faiss_index, search
 from hybrid_search import build_bm25, bm25_search, hybrid_search
 from evaluation import test_questions, check_retrieval
+from query_transforms import HYDE_CONFIG, text_for_retrieval
 
 
 def run_evaluation(pdf_path):
@@ -20,7 +21,8 @@ def run_evaluation(pdf_path):
 
     for query, expected_answer in test_questions.items():
 
-        query_embedding = model.encode([query.lower()])
+        retrieval_text, used_hyde, hyde_error = text_for_retrieval(query.lower())
+        query_embedding = model.encode([retrieval_text])
 
         vector_results = list(search(index, query_embedding)[0])
 
@@ -33,6 +35,10 @@ def run_evaluation(pdf_path):
         result = check_retrieval(expected_answer, retrieved_chunks)
 
         print("\nQuery:", query)
+        print("HyDE Enabled:", HYDE_CONFIG.enabled)
+        print("HyDE Used:", used_hyde)
+        if hyde_error:
+            print("HyDE Fallback Reason:", hyde_error)
         print("Match Found:", result)
 
         if result:

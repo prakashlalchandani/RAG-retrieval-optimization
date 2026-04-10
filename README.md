@@ -242,3 +242,17 @@ metadata-aware chunk indexing
 multi-document indexing support
 caching embeddings
 graph-based retrieval reasoning
+## HyDE Query Transformation Configuration
+
+The retrieval pipeline supports HyDE (Hypothetical Document Embeddings) via `query_transforms.py`.
+
+Set these environment variables to tune behavior without code changes:
+
+- `HYDE_ENABLED` (`true`/`false`): enable HyDE generation.
+- `HYDE_TIMEOUT_SECONDS` (float): timeout for LLM generation calls.
+- `HYDE_PROMPT_TEMPLATE` (string): prompt template, must include `{query}`.
+- `HYDE_LLM_ENDPOINT` (string): OpenAI-compatible chat completions endpoint.
+- `HYDE_LLM_MODEL` (string): model name for HyDE generation.
+- `HYDE_LLM_API_KEY` (string): API key for the configured endpoint.
+
+If HyDE generation fails or times out, the system automatically falls back to embedding the raw query.
