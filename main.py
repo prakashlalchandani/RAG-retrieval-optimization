@@ -1,4 +1,4 @@
-from chunking import extract_text, create_chunks
+from chunking import create_chunks
 from embeddings import create_embeddings, model
 from vector_store import build_faiss_index, search
 from hybrid_search import build_bm25, bm25_search, hybrid_search
@@ -7,9 +7,7 @@ from evaluation import test_questions, check_retrieval
 
 def run_evaluation(pdf_path):
 
-    text = extract_text(pdf_path)
-
-    chunks = create_chunks(text)
+    chunks = create_chunks(pdf_path)
 
     embeddings = create_embeddings(chunks)
 

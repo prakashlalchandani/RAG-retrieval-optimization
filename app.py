@@ -1,7 +1,9 @@
 from fastapi import FastAPI, UploadFile, File
 import shutil
 import re
-from chunking import extract_text, create_chunks
+import uuid
+import os
+from chunking import create_chunks
 from embeddings import create_embeddings, model
 from vector_store import build_faiss_index, search
 from hybrid_search import (
@@ -33,17 +35,23 @@ def health():
 # -----------------------------
 @app.post("/upload")
 def upload_pdf(file: UploadFile = File(...)):
-
     global chunks, embeddings, index, bm25
 
-    file_location = f"sample_data/{file.filename}"
+    # 1. Get the file extension (e.g., ".pdf")
+    file_extension = os.path.splitext(file.filename)[1]
+    
+    # 2. Generate a random UUID and combine it with the extension
+    unique_filename = f"{uuid.uuid4()}{file_extension}"
+    
+    # 3. Create the new, guaranteed-unique file path
+    file_location = f"sample_data/{unique_filename}"
 
+    # Now, even if the user uploads the same file twice, 
+    # it saves as two separate files (e.g., 550e8400-e29b-41d4-a716-446655440000.pdf)
     with open(file_location, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
 
-    text = extract_text(file_location)
-
-    chunks = create_chunks(text)
+    chunks = create_chunks(file_location)
 
     embeddings = create_embeddings(chunks)
 
