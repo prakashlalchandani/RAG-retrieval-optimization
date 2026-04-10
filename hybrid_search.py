@@ -16,23 +16,18 @@ def bm25_search(bm25, query, chunks, top_k=3):
 
     return ranked[:top_k]
 
-def reciprocal_rank_fusion(rank_lists, k=60):
-    fused_scores = {}
+def hybrid_search(vector_results, bm25_results):
 
-    for rank_list in rank_lists:
-        for rank, doc_id in enumerate(rank_list, start=1):
-            fused_scores[doc_id] = fused_scores.get(doc_id, 0.0) + 1.0 / (k + rank)
+    combined = []
 
-    ranked = sorted(
-        fused_scores.items(),
-        key=lambda item: (-item[1], item[0]),
-    )
-    return [doc_id for doc_id, _ in ranked]
+    for i in vector_results:
+        combined.append(i)
 
+    for i in bm25_results:
+        if i not in combined:
+            combined.append(i)
 
-def hybrid_search(vector_results, bm25_results, k=60):
-
-    return reciprocal_rank_fusion([vector_results, bm25_results], k=k)
+    return combined[:5]
 
 def numeric_boost_search(query, chunks):
 
