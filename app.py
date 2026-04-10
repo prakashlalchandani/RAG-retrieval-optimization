@@ -9,11 +9,11 @@ from vector_store import build_faiss_index, search
 from hybrid_search import (
     build_bm25,
     bm25_search,
-    reciprocal_rank_fusion,
+    hybrid_search,
     numeric_boost_search,
 )
 from evaluation import check_retrieval
-from query_transforms import HYDE_CONFIG, generate_query_variants, text_for_retrieval
+from query_transforms import HYDE_CONFIG, text_for_retrieval
 
 
 app = FastAPI(title="RAG Retrieval Optimization API")
@@ -24,38 +24,6 @@ chunks = None
 embeddings = None
 index = None
 bm25 = None
-
-
-def _build_query_set(query: str, variant_count: int = 4):
-    query_set = []
-    for candidate in [query] + generate_query_variants(query, n=variant_count):
-        normalized = " ".join(candidate.strip().split())
-        if normalized and normalized not in query_set:
-            query_set.append(normalized)
-    return query_set
-
-
-def _retrieve_chunk_ids(query: str, top_k: int = 5):
-    rank_lists = []
-    used_hyde = False
-    hyde_error = None
-
-    query_set = _build_query_set(query.lower())
-    for query_variant in query_set:
-        retrieval_text, variant_used_hyde, variant_hyde_error = text_for_retrieval(query_variant)
-        query_embedding = model.encode([retrieval_text])
-
-        vector_results = list(search(index, query_embedding, top_k=max(top_k * 2, 8))[0])
-        bm25_results = bm25_search(bm25, query_variant, chunks, top_k=max(top_k * 2, 8))
-
-        rank_lists.extend([vector_results, bm25_results])
-        used_hyde = used_hyde or variant_used_hyde
-        if variant_hyde_error and hyde_error is None:
-            hyde_error = variant_hyde_error
-
-    rank_lists.append(numeric_boost_search(query, chunks))
-    fused_results = reciprocal_rank_fusion(rank_lists)
-    return fused_results[:top_k], query_set, used_hyde, hyde_error
 
 
 @app.get("/")
@@ -107,13 +75,24 @@ def search_query(query: str):
     if index is None:
         return {"error": "Upload a PDF first."}
 
-    final_chunk_ids, query_set, used_hyde, hyde_error = _retrieve_chunk_ids(query, top_k=3)
-    retrieved_chunks = [chunks[i] for i in final_chunk_ids]
+    retrieval_text, used_hyde, hyde_error = text_for_retrieval(query.lower())
+    query_embedding = model.encode([retrieval_text])
+
+    vector_results = list(search(index, query_embedding)[0])
+
+    bm25_results = bm25_search(bm25, query.lower(), chunks)
+
+    numeric_results = numeric_boost_search(query, chunks)
+
+    final_results = hybrid_search(
+        vector_results + numeric_results,
+        bm25_results,
+    )
+
+    retrieved_chunks = [chunks[i] for i in final_results[:3]]
 
     return {
         "query": query,
-        "query_set": query_set,
-        "chunk_ids": final_chunk_ids,
         "results": retrieved_chunks,
         "hyde_enabled": HYDE_CONFIG.enabled,
         "hyde_used": used_hyde,
@@ -167,7 +146,21 @@ def evaluate_system():
     results_summary = []
 
     for query, expected_answer in expected_answers.items():
-        final_results, query_set, used_hyde, hyde_error = _retrieve_chunk_ids(query, top_k=5)
+
+        retrieval_text, used_hyde, hyde_error = text_for_retrieval(query.lower())
+        query_embedding = model.encode([retrieval_text])
+
+        vector_results = list(search(index, query_embedding)[0])
+
+        bm25_results = bm25_search(bm25, query.lower(), chunks)
+
+        numeric_results = numeric_boost_search(query, chunks)
+
+        final_results = hybrid_search(
+            vector_results + numeric_results,
+            bm25_results,
+        )
+
         retrieved_chunks = [chunks[i] for i in final_results]
 
         match = check_retrieval(expected_answer, retrieved_chunks)
@@ -177,7 +170,6 @@ def evaluate_system():
                 "query": query,
                 "expected": expected_answer,
                 "match_found": match,
-                "query_set": query_set,
                 "hyde_used": used_hyde,
                 "hyde_fallback_reason": hyde_error,
             }
