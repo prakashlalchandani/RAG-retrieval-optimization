@@ -9,6 +9,7 @@ __pycache__/
 # 3. Data & Results (Prevents large binary files from slowing down Git)
 sample_data/
 results/
+.env
 
 # 4. OS/IDE Specific
 .vscode/

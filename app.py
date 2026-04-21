@@ -4,15 +4,18 @@ import re
 import uuid
 import os
 from chunking import create_chunks
+from query_transform import generate_hyde_document, generate_multi_queries
 from embeddings import create_embeddings, model
-from vector_store import build_faiss_index, search
+from vector_store import build_qdrant_index, search_qdrant
 from hybrid_search import (
     build_bm25,
     bm25_search,
     hybrid_search,
     numeric_boost_search,
+    rerank_results,  # <-- NEW: Imported the re-ranker
 )
 from evaluation import check_retrieval
+from generation import generate_final_answer  # <-- NEW: Imported the LLM generator
 
 
 app = FastAPI(title="RAG Retrieval Optimization API")
@@ -55,7 +58,7 @@ def upload_pdf(file: UploadFile = File(...)):
 
     embeddings = create_embeddings(chunks)
 
-    index = build_faiss_index(embeddings)
+    build_qdrant_index(embeddings, chunks)
 
     bm25 = build_bm25(chunks)
 
@@ -70,28 +73,55 @@ def upload_pdf(file: UploadFile = File(...)):
 # -----------------------------
 @app.get("/search")
 def search_query(query: str):
-
     if index is None:
         return {"error": "Upload a PDF first."}
 
-    query_embedding = model.encode([query.lower()])
+    # --- 1. HyDE for Vector Search (FAISS) ---
+    # Generate the fake document
+    hyde_doc = generate_hyde_document(query)
+    # Embed the FAKE document, not the user's short query
+    hyde_embedding = model.encode([hyde_doc.lower()])
+    vector_results = search_qdrant(hyde_embedding[0])
 
-    vector_results = list(search(index, query_embedding)[0])
+    # --- 2. Multi-Query for Keyword Search (BM25) ---
+    # Generate 3 variations of the query
+    expanded_queries = generate_multi_queries(query)
+    expanded_queries.append(query) # Always include the original!
+    
+    bm25_results = []
+    # Search BM25 for every variation and combine them
+    for q in expanded_queries:
+        results = bm25_search(bm25, q.lower(), chunks)
+        bm25_results.extend(results)
+    
+    # Remove duplicates from BM25 results while preserving order
+    bm25_results = list(dict.fromkeys(bm25_results))
 
-    bm25_results = bm25_search(bm25, query.lower(), chunks)
-
+    # --- 3. Hybrid Merge ---
     numeric_results = numeric_boost_search(query, chunks)
-
+    
     final_results = hybrid_search(
         vector_results + numeric_results,
         bm25_results,
     )
 
-    retrieved_chunks = [chunks[i] for i in final_results[:3]]
+    # Get the top candidate chunks from the hybrid search
+    retrieved_chunks = [chunks[i] for i in final_results]
+
+    # --- 4. Cross-Encoder Re-Ranking (NEW) ---
+    # Re-rank the candidates to get the absolute best 3
+    best_chunks = rerank_results(query, retrieved_chunks, top_k=3)
+    
+    # --- 5. LLM Synthesis (NEW) ---
+    # Generate the final, concise answer using only the best chunks
+    final_answer = generate_final_answer(query, best_chunks)
 
     return {
         "query": query,
-        "results": retrieved_chunks,
+        "answer": final_answer,
+        "sources_used": best_chunks,
+        "hyde_document_used": hyde_doc,
+        "expanded_queries_used": expanded_queries
     }
 
 
@@ -144,7 +174,10 @@ def evaluate_system():
 
         query_embedding = model.encode([query.lower()])
 
-        vector_results = list(search(index, query_embedding)[0])
+        # --- THE UPDATE ---
+        # Call the persistent Qdrant database instead of FAISS
+        vector_results = search_qdrant(query_embedding[0])
+        # ------------------
 
         bm25_results = bm25_search(bm25, query.lower(), chunks)
 
