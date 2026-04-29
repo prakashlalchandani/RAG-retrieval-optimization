@@ -2,59 +2,83 @@ from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams, PointStruct
 import uuid
 
-# 1. Initialize Qdrant in persistent local mode. 
-# This creates a folder called "qdrant_storage" in your project directory.
+# Initialize Qdrant persistent storage
 client = QdrantClient(path="./qdrant_storage")
 
-# We name our database collection
-COLLECTION_NAME = "loan_agreements"
+def get_active_collection():
+    """Finds the most recent collection after a server restart."""
+    collections = client.get_collections().collections
+    names = [c.name for c in collections if c.name.startswith("loan_agreements")]
+    return names[-1] if names else "loan_agreements"
 
-def init_qdrant(dimension: int):
-    """Creates the collection if it doesn't already exist."""
-    if not client.collection_exists(collection_name=COLLECTION_NAME):
-        client.create_collection(
-            collection_name=COLLECTION_NAME,
-            vectors_config=VectorParams(size=dimension, distance=Distance.COSINE),
-        )
+# Automatically locate the database name when the server boots up
+current_collection_name = get_active_collection()
+
 
 def build_qdrant_index(embeddings, chunks):
-    """Takes embeddings and chunks and saves them to the persistent database."""
+    global current_collection_name
     dimension = len(embeddings[0])
-    init_qdrant(dimension)
 
+    # 1. Housekeeping: Delete old collections so we don't waste hard drive space
+    collections = client.get_collections().collections
+    for c in collections:
+        if c.name.startswith("loan_agreements"):
+            client.delete_collection(c.name)
+
+    # 2. Generate a fresh, unique collection name
+    current_collection_name = f"loan_agreements_{uuid.uuid4().hex[:8]}"
+    
+    # 3. Create the clean collection
+    client.create_collection(
+        collection_name=current_collection_name,
+        vectors_config=VectorParams(size=dimension, distance=Distance.COSINE),
+    )
+
+    # 4. Insert points
     points = []
     for i, (embedding, chunk) in enumerate(zip(embeddings, chunks)):
-        # Qdrant requires a unique ID for every single vector
-        point_id = str(uuid.uuid4())
-        
         points.append(PointStruct(
-            id=point_id,
-            vector=embedding.tolist(), # Convert numpy array to standard list
-            # We save the chunk's text and original index directly inside the database!
+            id=str(uuid.uuid4()),
+            vector=embedding.tolist(),
             payload={"text": chunk, "original_index": i} 
         ))
 
-    # Push to database
     client.upsert(
-        collection_name=COLLECTION_NAME,
+        collection_name=current_collection_name,
         points=points
     )
     return True
 
+
 def search_qdrant(query_embedding, top_k=8):
     """Searches the persistent database and returns the original chunk indices."""
-    
-    # Check if we even have a database yet
-    if not client.collection_exists(collection_name=COLLECTION_NAME):
+    if not client.collection_exists(collection_name=current_collection_name):
         return []
 
-    search_result = client.search(
-        collection_name=COLLECTION_NAME,
-        query_vector=query_embedding.tolist(),
+    search_result = client.query_points(
+        collection_name=current_collection_name,
+        query=query_embedding.tolist(),
         limit=top_k
+    ).points
+    
+    return [hit.payload["original_index"] for hit in search_result]
+
+
+def get_all_chunks():
+    """Extracts all text chunks directly from the Qdrant database payloads."""
+    if not client.collection_exists(collection_name=current_collection_name):
+        return []
+        
+    # Qdrant's scroll API fetches records without needing a search query
+    records, _ = client.scroll(
+        collection_name=current_collection_name,
+        limit=10000,
+        with_payload=True,
+        with_vectors=False
     )
     
-    # To keep this perfectly compatible with your existing hybrid_search logic,
-    # we return a list of the original indices (e.g., [14, 2, 7])
-    indices = [hit.payload["original_index"] for hit in search_result]
-    return indices
+    # Sort by the original index so the document reads in the correct order
+    sorted_records = sorted(records, key=lambda x: x.payload["original_index"])
+    
+    # Extract just the text strings
+    return [record.payload["text"] for record in sorted_records]

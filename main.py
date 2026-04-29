@@ -1,18 +1,18 @@
 from chunking import create_chunks
 from embeddings import create_embeddings, model
-from vector_store import build_faiss_index, search
+# THE FIX: Updated imports to use Qdrant
+from vector_store import build_qdrant_index, search_qdrant 
 from hybrid_search import build_bm25, bm25_search, hybrid_search
 from evaluation import test_questions, check_retrieval
-
 
 def run_evaluation(pdf_path):
 
     chunks = create_chunks(pdf_path)
-
     embeddings = create_embeddings(chunks)
 
-    index = build_faiss_index(embeddings)
-
+    # THE FIX: Build the Qdrant persistent index instead of FAISS
+    build_qdrant_index(embeddings, chunks)
+    
     bm25 = build_bm25(chunks)
 
     correct = 0
@@ -22,7 +22,8 @@ def run_evaluation(pdf_path):
 
         query_embedding = model.encode([query.lower()])
 
-        vector_results = list(search(index, query_embedding)[0])
+        # THE FIX: Use Qdrant search. Notice we pass [0] to get the specific vector array
+        vector_results = search_qdrant(query_embedding[0])
 
         bm25_results = bm25_search(bm25, query, chunks)
 
@@ -42,9 +43,6 @@ def run_evaluation(pdf_path):
 
     print("\nFinal Accuracy:", accuracy)
 
-
 if __name__ == "__main__":
-
     pdf_path = input("Enter PDF path for evaluation: ")
-
     run_evaluation(pdf_path)

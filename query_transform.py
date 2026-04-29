@@ -1,13 +1,17 @@
 import os
 import time
 from dotenv import load_dotenv
-from google import genai
-from google.genai.errors import APIError
+from groq import Groq
 
+# Load environment variables
 load_dotenv()
-client = genai.Client()
+
+# Initialize the Groq client
+# It will automatically detect os.environ["GROQ_API_KEY"]
+client = Groq()
 
 def generate_hyde_document(query: str, max_retries=3) -> str:
+    """Generates a hypothetical financial document snippet using Groq."""
     prompt = f"""
     You are a financial legal expert. A user has asked this question: '{query}'
     Write a short, formal 2-sentence excerpt from a loan agreement that would answer this question.
@@ -17,22 +21,27 @@ def generate_hyde_document(query: str, max_retries=3) -> str:
     # Retry Loop
     for attempt in range(max_retries):
         try:
-            response = client.models.generate_content(
-                model='gemini-2.5-flash',
-                contents=prompt
+            response = client.chat.completions.create(
+                messages=[
+                    {"role": "user", "content": prompt}
+                ],
+                model="llama-3.1-8b-instant", # Using the blazingly fast 8B model
+                temperature=0.2 # Lower temperature keeps the text formal and factual
             )
-            return response.text
+            # Extract the text from the Groq response structure
+            return response.choices[0].message.content.strip()
             
-        except APIError as e: # Catch the Google API error
+        except Exception as e: # Catch API errors
             if attempt < max_retries - 1:
-                wait_time = 2 ** attempt # Waits 1s, then 2s, then 4s
-                print(f"API busy. Retrying HyDE in {wait_time} seconds...")
+                wait_time = 2 ** attempt 
+                print(f"Groq API busy. Retrying HyDE in {wait_time} seconds... Error: {e}")
                 time.sleep(wait_time)
             else:
-                print(f"API completely unavailable. Skipping HyDE: {e}")
-                return "" # Return empty string so the app doesn't crash
+                print(f"Groq API completely unavailable. Skipping HyDE. Error: {e}")
+                return ""
 
 def generate_multi_queries(query: str, max_retries=3) -> list:
+    """Rewrites the query into multiple formal variations using Groq."""
     prompt = f"""
     Rewrite the following search query into 3 different variations using formal financial and banking terminology.
     Return only the queries, separated by newlines. Do not use bullet points or numbers.
@@ -41,17 +50,25 @@ def generate_multi_queries(query: str, max_retries=3) -> list:
     
     for attempt in range(max_retries):
         try:
-            response = client.models.generate_content(
-                model='gemini-2.5-flash',
-                contents=prompt
+            response = client.chat.completions.create(
+                messages=[
+                    {"role": "user", "content": prompt}
+                ],
+                model="llama-3.1-8b-instant",
+                temperature=0.2
             )
-            return [q.strip() for q in response.text.strip().split('\n') if q.strip()]
             
-        except APIError as e:
+            # Extract the text
+            text_output = response.choices[0].message.content.strip()
+            
+            # Split the response into a list of strings
+            return [q.strip() for q in text_output.split('\n') if q.strip()]
+            
+        except Exception as e:
             if attempt < max_retries - 1:
                 wait_time = 2 ** attempt
-                print(f"API busy. Retrying Multi-Query in {wait_time} seconds...")
+                print(f"Groq API busy. Retrying Multi-Query in {wait_time} seconds... Error: {e}")
                 time.sleep(wait_time)
             else:
-                print(f"API completely unavailable. Skipping Multi-Query: {e}")
-                return [] # Return empty list so the app doesn't crash
+                print(f"Groq API completely unavailable. Skipping Multi-Query. Error: {e}")
+                return []
