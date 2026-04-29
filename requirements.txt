@@ -1,15 +1,17 @@
-sentence-transformers
-faiss-cpu
-rank-bm25
-pypdf
-numpy
-scikit-learn
+# --- Core Backend ---
 fastapi
-unicorn
+uvicorn
+python-multipart
 python-dotenv
+
+# --- AI & Embeddings ---
+groq
+google-genai
+numpy
+
+# --- Vector Database ---
+qdrant-client
+
+# --- Parsing & Chunking ---
+llama-index-core
 unstructured[pdf]
-pdf2image
-pdfminer.six
-pandas
-lxml
-tabulate
