@@ -1,4 +1,5 @@
 from fastapi import FastAPI, UploadFile, File
+from fastapi.middleware.cors import CORSMiddleware
 import shutil
 import re
 import uuid
@@ -6,19 +7,26 @@ import os
 from chunking import create_chunks
 from query_transform import generate_hyde_document, generate_multi_queries
 from embeddings import create_embeddings
-# THE FIX: Imported our new get_all_chunks function
 from vector_store import build_qdrant_index, search_qdrant, get_all_chunks
 from hybrid_search import (
     build_bm25,
     bm25_search,
     hybrid_search,
     numeric_boost_search,
-    rerank_results,  
+    rerank_results,
 )
 from evaluation import check_retrieval
 from generation import generate_answer
 
 app = FastAPI(title="RAG Retrieval Optimization API")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"], # Vite's default port
+    allow_credentials=True,
+    allow_methods=["*"], # Allows GET, POST, etc.
+    allow_headers=["*"],
+)
 
 # Global pipeline state (Cleaned up)
 chunks = None
@@ -46,7 +54,7 @@ def upload_pdf(file: UploadFile = File(...)):
     chunks = create_chunks(file_location)
     embeddings = create_embeddings(chunks)
     
-    build_qdrant_index(embeddings, chunks)
+    build_qdrant_index(embeddings, chunks, file.filename)
     bm25 = build_bm25(chunks)
 
     return {
@@ -72,9 +80,14 @@ def search_query(query: str):
     # --------------------------------------
 
     # 1. HyDE Vector Search 
-    hyde_doc = generate_hyde_document(query)
-    hyde_embedding = create_embeddings([hyde_doc.lower()])
-    vector_results = search_qdrant(hyde_embedding[0])
+    # hyde_doc = generate_hyde_document(query)
+    # hyde_embedding = create_embeddings([hyde_doc.lower()])
+    # vector_results = search_qdrant(hyde_embedding[0])
+
+    # 1. Standard Vector Search (HyDE Disabled)
+    # Ab hum fake document ki jagah direct user ki query use kar rahe hain
+    query_embedding = create_embeddings([query.lower()])
+    vector_results = search_qdrant(query_embedding[0])
 
     # 2. Multi-Query BM25 Search
     expanded_queries = generate_multi_queries(query)
@@ -102,7 +115,7 @@ def search_query(query: str):
         "query": query,
         "answer": final_answer,
         "sources_used": best_chunks,
-        "hyde_document_used": hyde_doc,
+        "hyde_document_used": "Disabled",
         "expanded_queries_used": expanded_queries
     }
 

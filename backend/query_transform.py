@@ -15,7 +15,7 @@ def generate_hyde_document(query: str, max_retries=3) -> str:
     prompt = f"""
     You are a financial legal expert. A user has asked this question: '{query}'
     Write a short, formal 2-sentence excerpt from a loan agreement that would answer this question.
-    Do not use introductory filler. Just write the formal legal text.
+    CRITICAL: Do not include any fake numbers, percentages, or currency amounts. Use placeholders like [AMOUNT] or [PERCENTAGE] instead.
     """
     
     # Retry Loop

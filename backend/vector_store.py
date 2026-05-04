@@ -1,4 +1,5 @@
 from qdrant_client import QdrantClient
+from qdrant_client.http import models
 from qdrant_client.models import Distance, VectorParams, PointStruct
 import uuid
 
@@ -15,7 +16,7 @@ def get_active_collection():
 current_collection_name = get_active_collection()
 
 
-def build_qdrant_index(embeddings, chunks):
+def build_qdrant_index(embeddings, chunks, filename):
     global current_collection_name
     dimension = len(embeddings[0])
 
@@ -27,6 +28,8 @@ def build_qdrant_index(embeddings, chunks):
 
     # 2. Generate a fresh, unique collection name
     current_collection_name = f"loan_agreements_{uuid.uuid4().hex[:8]}"
+
+    print(f"Current collection name: ", current_collection_name)
     
     # 3. Create the clean collection
     client.create_collection(
@@ -40,7 +43,7 @@ def build_qdrant_index(embeddings, chunks):
         points.append(PointStruct(
             id=str(uuid.uuid4()),
             vector=embedding.tolist(),
-            payload={"text": chunk, "original_index": i} 
+            payload={"text": chunk, "original_index": i, "document_name": filename} # <-- filename add kiya 
         ))
 
     client.upsert(
@@ -50,14 +53,20 @@ def build_qdrant_index(embeddings, chunks):
     return True
 
 
-def search_qdrant(query_embedding, top_k=8):
-    """Searches the persistent database and returns the original chunk indices."""
+def search_qdrant(query_embedding, target_document=None, top_k=8):
     if not client.collection_exists(collection_name=current_collection_name):
         return []
+
+    search_filter = None
+    if target_document:
+        search_filter = models.Filter(
+            must=[models.FieldCondition(key="document_name", match=models.MatchValue(value=target_document))]
+        )
 
     search_result = client.query_points(
         collection_name=current_collection_name,
         query=query_embedding.tolist(),
+        query_filter=search_filter, # <-- Yahan filter lagaya
         limit=top_k
     ).points
     

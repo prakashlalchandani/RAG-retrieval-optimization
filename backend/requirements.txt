@@ -8,6 +8,8 @@ python-dotenv
 groq
 google-genai
 numpy
+sentence-transformers
+torch
 
 # --- Vector Database ---
 qdrant-client
@@ -15,3 +17,7 @@ qdrant-client
 # --- Parsing & Chunking ---
 llama-index-core
 unstructured[pdf]
+pypdf
+
+# --- Search & Ranking ---
+rank-bm25
