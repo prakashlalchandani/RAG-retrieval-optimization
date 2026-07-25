@@ -10,7 +10,14 @@ from agentlens_sdk.instrumentation import trace_span
 from agentlens_sdk.models.model import SpanType
 
 logger.info("Loading CrossEncoder Re-ranker into memory...")
-reranker = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
+reranker = CrossEncoder("BAAI/bge-reranker-v2-m3")
+
+def tokenize_multilingual(text: str) -> list:
+    """
+    Extracts words using Unicode boundaries. 
+    This prevents Gujarati/Hindi/Marathi characters from being fused with punctuation.
+    """
+    return re.findall(r'\w+', text.lower(), flags=re.UNICODE)
 
 class RetrievalService:
     # Nested Dictionary structure: { session_id: { filename: [chunks] } }
@@ -63,8 +70,8 @@ class RetrievalService:
             cls._chunks[session_id][doc_name].sort(key=lambda x: x[0])
             cls._chunks[session_id][doc_name] = [text for _, text in cls._chunks[session_id][doc_name]]
             
-            # Cache individual BM25 for this document
-            tokenized = [chunk.split() for chunk in cls._chunks[session_id][doc_name]]
+            # Cache individual BM25 for this document using multilingual tokenizer
+            tokenized = [tokenize_multilingual(chunk) for chunk in cls._chunks[session_id][doc_name]]
             if session_id not in cls._bm25:
                 cls._bm25[session_id] = {}
             cls._bm25[session_id][doc_name] = BM25Okapi(tokenized)
@@ -83,8 +90,8 @@ class RetrievalService:
         # Save chunks under the specific filename
         cls._chunks[session_id][filename] = new_chunks
         
-        # Build BM25 for this specific document
-        tokenized = [chunk.split() for chunk in new_chunks]
+        # Build BM25 for this specific document using multilingual tokenizer
+        tokenized = [tokenize_multilingual(chunk) for chunk in new_chunks]
         cls._bm25[session_id][filename] = BM25Okapi(tokenized)
         
         logger.info(f"Memory index appended with '{filename}' ({len(new_chunks)} chunks) for {session_id}.")
@@ -111,7 +118,7 @@ class RetrievalService:
                         active_chunks.extend(chunks)
                     
                     # Dynamically compile BM25 for the global selection
-                    tokenized_all = [chunk.split() for chunk in active_chunks]
+                    tokenized_all = [tokenize_multilingual(chunk) for chunk in active_chunks]
                     bm25_engine = BM25Okapi(tokenized_all)
                     
                     # Setup Qdrant filter for just the session
@@ -137,14 +144,13 @@ class RetrievalService:
                     return []
 
                 # 3. Vector Search (Qdrant)
-                # 3. Vector Search (Qdrant)
                 query_embedding = await get_query_embedding(enriched_query.lower())
                 response = await self.qdrant.query_points(
                     collection_name=settings.COLLECTION_NAME,
                     query=query_embedding.tolist(),
                     query_filter=qdrant_filter,
                     limit=settings.TOP_K_RESULTS
-)
+                )
                 
                 # If searching "all", indices map differently, so we extract raw text directly from Qdrant payloads
                 vector_chunks = [hit.payload["text"] for hit in response.points]
@@ -153,7 +159,8 @@ class RetrievalService:
                 bm25_chunks = []
                 all_queries = expanded_queries + [original_query, enriched_query]
                 for q in all_queries:
-                    scores = bm25_engine.get_scores(q.lower().split())
+                    # Score against the multilingually tokenized query
+                    scores = bm25_engine.get_scores(tokenize_multilingual(q))
                     ranked_indices = sorted(range(len(scores)), key=lambda i: scores[i], reverse=True)
                     for idx in ranked_indices[:3]:
                         if idx < len(active_chunks):

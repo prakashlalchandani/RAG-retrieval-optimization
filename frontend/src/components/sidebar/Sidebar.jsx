@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { FileText, Sun, Moon, LogOut, UploadCloud, X } from 'lucide-react';
+import { FileText, Sun, Moon, LogOut, UploadCloud, X, User } from 'lucide-react';
 import { useAppContext } from '../../context/AppContext';
 import DocumentSelector from './DocumentSelector';
 
@@ -13,7 +13,7 @@ const Sidebar = ({
   setSelectedDocument, 
   handleDeleteDocument 
 }) => {
-  const { isDarkMode, toggleDarkMode, logout } = useAppContext();
+  const { isDarkMode, toggleDarkMode, logout, username } = useAppContext();
   const fileInputRef = useRef(null);
   
   // 1. STATE FOR SMART PROGRESS BAR
@@ -135,6 +135,25 @@ const Sidebar = ({
           />
         </div>
       </div>
+
+      {/* Bottom Profile Section */}
+      <div className="mt-auto p-5 border-t border-zinc-200 dark:border-zinc-800/50 flex items-center gap-3">
+        {/* Avatar Circle generating initials */}
+        <div className="w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center font-bold text-white shadow-sm shrink-0">
+          {username ? username.charAt(0).toUpperCase() : <User className="w-4 h-4" />}
+        </div>
+        
+        {/* Username Display */}
+        <div className="flex flex-col min-w-0">
+          <span className="text-sm font-medium text-zinc-800 dark:text-zinc-200 truncate capitalize">
+            {username || 'Loading...'}
+          </span>
+          <span className="text-xs text-zinc-500 dark:text-zinc-500 truncate">
+            Free Plan
+          </span>
+        </div>
+      </div>
+
     </div>
   );
 };

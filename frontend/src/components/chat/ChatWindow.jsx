@@ -22,7 +22,7 @@ const ChatWindow = ({ messages, isLoading }) => {
             <Sparkles className="w-7 h-7 text-zinc-400 dark:text-zinc-500" />
           </div>
           <h2 className="text-3xl md:text-4xl font-semibold text-zinc-800 dark:text-zinc-100 mb-3 tracking-tight text-center">
-            Hi, <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-500 to-zinc-800 dark:from-zinc-400 dark:to-white">{username}</span>
+            Hi, <span className="capitalize text-transparent bg-clip-text bg-gradient-to-r from-zinc-500 to-zinc-800 dark:from-zinc-400 dark:to-white">{username}</span>
           </h2>
           <p className="text-zinc-500 dark:text-zinc-400 text-lg text-center max-w-md">
             Ready to audit your documents? Upload an agreement to get started.

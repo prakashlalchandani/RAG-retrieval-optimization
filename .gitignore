@@ -8,6 +8,8 @@ backend/sample_data/
 backend/logs/
 backend/testimonials
 backend/logs/finaudit.log
+backend/config/__pycache__
+backend/services/__pycache__
 
 # --- Database ---
 *.db

@@ -1,7 +1,7 @@
 import uuid
 import asyncio
 from datetime import datetime, timezone
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks
 from sqlalchemy.ext.asyncio import AsyncSession
 
 # --- AgentLens SDK Imports ---
@@ -14,6 +14,7 @@ from config.database import get_db
 from config.logger import logger
 from services.generation_service import GenerationService
 from services.retrieval_service import RetrievalService
+from services.evaluation_service import run_ragas_evaluation
 import models.model as models
 from config.auth import get_current_user
 
@@ -49,6 +50,7 @@ async def run_finai_pipeline(query, document_selector, session_id, gen_service, 
 @router.get("/search")
 async def search_query(
     query: str,
+    background_tasks: BackgroundTasks,  # <--- Added BackgroundTasks
     document_selector: str = "all",
     session_id: str = "default_user",
     gen_service: GenerationService = Depends(),
@@ -63,7 +65,7 @@ async def search_query(
     trace_id = str(uuid.uuid4())
     set_current_trace_id(trace_id)
     set_current_span_id(None)
-    span_buffer.clear() # Request aane par purana data clear karna zaroori hai!
+    span_buffer.clear() # When request comes make sure to clear old data
     start_time = datetime.now(timezone.utc)
     status = StatusCode.SUCCESS
     
@@ -71,6 +73,16 @@ async def search_query(
         final_answer, best_chunks, routed_via, synonyms = await run_finai_pipeline(
             query, document_selector, session_id, gen_service, retrieval_service, db
         )
+        
+        # <--- CHANGE 2: Queue the Ragas evaluation asynchronously
+        if best_chunks:
+            background_tasks.add_task(
+                run_ragas_evaluation,
+                query=query,
+                answer=final_answer,
+                contexts=best_chunks
+            )
+        # --------------------------------------------------------
         
         response_data = {
             "query": query, "answer": final_answer,

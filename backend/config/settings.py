@@ -6,6 +6,7 @@ class Settings(BaseSettings):
     # 1. API Keys & Security
     # ==========================================
     GROQ_API_KEY: str  # No default value; forces it to be in the .env file
+    GEMINI_API_KEY: str
 
     # ==========================================
     # 2. Database (Qdrant Cloud)

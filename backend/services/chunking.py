@@ -30,11 +30,12 @@ async def summarize_table(table_html):
         return "Table summarization unavailable."
 
 def extract_pdf_sync(file_loc):
-    """Yeh synchronous function hai jo background thread me chalega."""
+    """This is a synchronous function which runs in background thread."""
     return partition(
         filename=file_loc,
         strategy="hi_res",
-        infer_table_structure=True
+        infer_table_structure=True,
+        language=["eng", "hin", "guj", "mar"]
     )
 
 async def create_chunks(file_location):

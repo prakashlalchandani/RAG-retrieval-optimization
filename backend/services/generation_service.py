@@ -6,11 +6,9 @@ from langchain_core.messages import HumanMessage, AIMessage
 from agentlens_sdk.instrumentation import trace_span
 from agentlens_sdk.models.model import SpanType
 
-# --- New Database Imports ---
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 import models.model as models
-# ----------------------------
 
 from config.settings import settings
 from config.clients import groq_client
@@ -26,7 +24,7 @@ class GenerationService:
         )
 
     async def get_chat_history_from_db(self, db: AsyncSession, session_id: str):
-        """PostgreSQL se specific session ki chat history nikalta hai."""
+        """It gives chat history for particular session_id from PostgreSQL database"""
         stmt = select(models.Message).where(
             models.Message.session_id == session_id
         ).order_by(models.Message.created_at.asc())
@@ -71,6 +69,8 @@ class GenerationService:
         1. "chat": General greetings or pleasantries.
         2. "rag": Questions about loans, EMIs, interest rates, or document terms.
         
+        CRITICAL: The user may speak English, Hindi, Gujarati, or Marathi. If the route is "chat", the "chat_response" MUST be in the exact same language as the user's query.
+        
         Respond in JSON with exactly two keys: "route" and "chat_response".
         """
         try:
@@ -94,6 +94,7 @@ class GenerationService:
         """Acts as a financial translator."""
         system_prompt = """
         Generate 3 to 5 highly specific legal/financial synonyms for the user's query.
+        CRITICAL: You must generate the synonyms in the EXACT SAME LANGUAGE as the user's query (e.g., English, Hindi, Gujarati, or Marathi).
         Output ONLY a comma-separated list. Do not answer the question.
         """
         try:
@@ -116,6 +117,7 @@ class GenerationService:
         """Rewrites the query into multiple formal variations using Groq."""
         prompt = f"""
         Rewrite the following search query into 3 different variations using formal financial and banking terminology.
+        CRITICAL: The rewritten queries MUST be in the EXACT SAME LANGUAGE as the original query (e.g., English, Hindi, Gujarati, or Marathi).
         Return only the queries, separated by newlines. Do not use bullet points or numbers.
         Original query: '{query}'
         """
@@ -152,6 +154,7 @@ class GenerationService:
             "1. NO MENTAL MATH.\n"
             "2. ALWAYS use the provided EMI.\n"
             "3. EXTRACT CAREFULLY.\n"
+            "4. CRITICAL: You MUST respond in the EXACT SAME LANGUAGE as the user's question (e.g., if asked in Gujarati, reply in Gujarati). Translate the provided context internally if needed.\n"
         )
 
         # 1. DB se pichli history lekar aao
