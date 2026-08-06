@@ -5615,3 +5615,437 @@ Traceback (most recent call last):
     return self._scores_dict[key]
            ~~~~~~~~~~~~~~~~~^^^^^
 KeyError: 0
+2026-07-25 14:04:50 - [retrieval_service.py] - INFO - Loading CrossEncoder Re-ranker into memory...
+2026-07-25 14:06:39 - [generation_service.py] - INFO - Routing Decision: RAG
+2026-07-25 14:06:41 - [generation_service.py] - INFO - Query Expanded with Synonyms: Borrower, Lender, Debtor, Creditor, Mortgagor, Mortgagee, Payer, Payee, Obligor, Obligee, Drawer, Drawee, Payor, Payee, Lessor, Lessee, Depositor, Depositor, Investor, Investor, Banker, Borrower, Creditor, Debtor, Drawer, Drawee, Investor, Lender, Mortgagor, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor, Payer, Depositor, Investor, Lessor, Lessee, Banker, Creditor, Mortgagor, Obligee, Obligor, Payee, Payor,
+2026-07-25 14:06:41 - [generation_service.py] - INFO - Multi-queries generated: ['Who is the creditor providing the loan and the principal amount of the loan and the amortization period of the loan in months and years?', 'What is the identity of the financier offering the loan and the outstanding principal balance of the loan and the loan term in months and years?', 'What is the name of the institution extending the loan and the total loan amount and the repayment duration of the loan in months and years?']
+2026-07-25 14:06:41 - [retrieval_service.py] - WARNING - RAM is empty for 1_1784907425544! Recovering all documents from Qdrant...
+2026-07-25 14:06:42 - [retrieval_service.py] - INFO - Successfully recovered 2 documents for session 1_1784907425544.
+2026-07-25 14:07:41 - [generation_service.py] - INFO - Synthesizing response for session: 1_1784907425544 using DB history...
+2026-07-25 14:07:44 - [evaluation_service.py] - INFO - Initiating RAGAS evaluation for query: 'Who is the lender of loan and EMI amount of loan and tenure of loan in months and years?'...
+2026-07-25 14:09:41 - [evaluation_service.py] - ERROR - Ragas Evaluation Failed: 0
+Traceback (most recent call last):
+  File "D:\Projects\Main\rag-retrieval-optimization\backend\services\evaluation_service.py", line 100, in run_ragas_evaluation
+    scores = dict(result)
+             ^^^^^^^^^^^^
+  File "D:\Projects\Main\rag-retrieval-optimization\backend\RAG312\Lib\site-packages\ragas\dataset_schema.py", line 460, in __getitem__
+    return self._scores_dict[key]
+           ~~~~~~~~~~~~~~~~~^^^^^
+KeyError: 0
+2026-07-25 14:50:53 - [retrieval_service.py] - INFO - Loading CrossEncoder Re-ranker into memory...
+2026-07-25 14:52:19 - [generation_service.py] - INFO - Routing Decision: CHAT
+2026-07-25 14:52:52 - [generation_service.py] - INFO - Routing Decision: RAG
+2026-07-25 14:52:52 - [generation_service.py] - INFO - Query Expanded with Synonyms: Outstanding principal balance, initial principal amount, initial loan principal, principal loan balance, initial loan amount.
+2026-07-25 14:52:52 - [generation_service.py] - INFO - Multi-queries generated: ['What is the outstanding principal balance of the loan?', 'What is the initial principal sum borrowed?', 'What is the principal amount of the loan obligation?']
+2026-07-25 14:52:52 - [retrieval_service.py] - WARNING - RAM is empty for 1_1784907425544! Recovering all documents from Qdrant...
+2026-07-25 14:52:53 - [retrieval_service.py] - INFO - Successfully recovered 2 documents for session 1_1784907425544.
+2026-07-25 14:53:06 - [generation_service.py] - INFO - Synthesizing response for session: 1_1784907425544 using DB history...
+2026-07-25 14:53:10 - [evaluation_service.py] - INFO - Initiating RAGAS evaluation for query: 'What is the principal loan amount?'...
+2026-07-25 14:55:52 - [evaluation_service.py] - INFO - 
+============================================================
+2026-07-25 14:55:52 - [evaluation_service.py] - INFO - 📊 RAGAS LIVE EVALUATION SCORECARD 📊
+2026-07-25 14:55:52 - [evaluation_service.py] - INFO - Query: What is the principal loan amount?
+2026-07-25 14:55:52 - [evaluation_service.py] - INFO - ------------------------------------------------------------
+2026-07-25 14:55:52 - [evaluation_service.py] - ERROR - Ragas Evaluation Failed: unsupported format string passed to list.__format__
+Traceback (most recent call last):
+  File "D:\Projects\Main\rag-retrieval-optimization\backend\services\evaluation_service.py", line 69, in run_ragas_evaluation
+    logger.info(f"Faithfulness       (0-1): {faith_score:.4f}")
+                                            ^^^^^^^^^^^^^^^^^
+TypeError: unsupported format string passed to list.__format__
+2026-07-25 14:56:35 - [retrieval_service.py] - INFO - Loading CrossEncoder Re-ranker into memory...
+2026-07-25 14:58:07 - [retrieval_service.py] - INFO - Loading CrossEncoder Re-ranker into memory...
+2026-07-25 14:58:45 - [retrieval_service.py] - INFO - Loading CrossEncoder Re-ranker into memory...
+2026-07-25 14:59:31 - [generation_service.py] - INFO - Routing Decision: RAG
+2026-07-25 14:59:32 - [generation_service.py] - INFO - Query Expanded with Synonyms: Interest rate, Annual Percentage Rate (APR), Nominal Interest Rate, Effective Interest Rate, 
+
+EMI amount, Monthly Installment, Repayment Amount, Loan EMI, Equated Monthly Installment.
+2026-07-25 14:59:32 - [generation_service.py] - INFO - Multi-queries generated: ['What is the prevailing market rate of interest and the corresponding Equated Monthly Instalment (EMI) amount?', 'What is the prevailing market rate of interest and the corresponding monthly instalment amount as per the Equated Monthly Instalment (EMI) formula?', 'What is the prevailing market rate of interest and the corresponding monthly instalment amount as per the Equated Monthly Instalment (EMI) calculation?']
+2026-07-25 14:59:32 - [retrieval_service.py] - WARNING - RAM is empty for 1_1784907425544! Recovering all documents from Qdrant...
+2026-07-25 14:59:33 - [retrieval_service.py] - INFO - Successfully recovered 2 documents for session 1_1784907425544.
+2026-07-25 14:59:49 - [generation_service.py] - INFO - Synthesizing response for session: 1_1784907425544 using DB history...
+2026-07-25 14:59:52 - [evaluation_service.py] - INFO - Initiating RAGAS evaluation for query: 'What is interest rate and EMI amount?'...
+2026-07-25 15:02:50 - [evaluation_service.py] - INFO - 
+============================================================
+2026-07-25 15:02:50 - [evaluation_service.py] - INFO - 📊 RAGAS LIVE EVALUATION SCORECARD 📊
+2026-07-25 15:02:50 - [evaluation_service.py] - INFO - Query: What is interest rate and EMI amount?
+2026-07-25 15:02:50 - [evaluation_service.py] - INFO - ------------------------------------------------------------
+2026-07-25 15:02:50 - [evaluation_service.py] - ERROR - Ragas Evaluation Failed: unsupported format string passed to list.__format__
+Traceback (most recent call last):
+  File "D:\Projects\Main\rag-retrieval-optimization\backend\services\evaluation_service.py", line 69, in run_ragas_evaluation
+    logger.info(f"Faithfulness       (0-1): {faith_score:.4f}")
+                                            ^^^^^^^^^^^^^^^^^
+TypeError: unsupported format string passed to list.__format__
+2026-07-25 15:20:54 - [generation_service.py] - INFO - Routing Decision: RAG
+2026-07-25 15:20:54 - [generation_service.py] - INFO - Query Expanded with Synonyms: creditor, financier, moneylender, disbursing agent, paymaster
+2026-07-25 15:20:54 - [generation_service.py] - INFO - Multi-queries generated: ['Identify the Lending Institution', 'Name of the financial institution providing the loan or credit facility?', 'Name of the entity extending the credit or loan facility?', 'Name of the lending entity?']
+2026-07-25 15:21:08 - [generation_service.py] - INFO - Synthesizing response for session: 1_1784907425544 using DB history...
+2026-07-25 15:21:11 - [evaluation_service.py] - INFO - Initiating RAGAS evaluation for query: 'Name of lender?'...
+2026-07-25 15:23:05 - [evaluation_service.py] - INFO - 
+============================================================
+2026-07-25 15:23:05 - [evaluation_service.py] - INFO - 📊 RAGAS LIVE EVALUATION SCORECARD 📊
+2026-07-25 15:23:05 - [evaluation_service.py] - INFO - Query: Name of lender?
+2026-07-25 15:23:05 - [evaluation_service.py] - INFO - ------------------------------------------------------------
+2026-07-25 15:23:05 - [evaluation_service.py] - ERROR - Ragas Evaluation Failed: unsupported format string passed to list.__format__
+Traceback (most recent call last):
+  File "D:\Projects\Main\rag-retrieval-optimization\backend\services\evaluation_service.py", line 69, in run_ragas_evaluation
+    logger.info(f"Faithfulness       (0-1): {faith_score:.4f}")
+                                            ^^^^^^^^^^^^^^^^^
+TypeError: unsupported format string passed to list.__format__
+2026-07-25 15:24:50 - [retrieval_service.py] - INFO - Loading CrossEncoder Re-ranker into memory...
+2026-07-25 15:25:51 - [retrieval_service.py] - INFO - Loading CrossEncoder Re-ranker into memory...
+2026-07-25 15:29:14 - [documents.py] - INFO - 📥 [UPLOAD START] Receiving file: loan2.txt
+2026-07-25 15:29:14 - [chunking.py] - INFO - Extracting text and tables using Unstructured (hi_res mode) in background thread...
+2026-07-25 15:29:27 - [chunking.py] - INFO - Chunking text using SentenceSplitter...
+2026-07-25 15:29:31 - [retrieval_service.py] - INFO - Memory index appended with 'loan2.txt' (1 chunks) for 1_1784907425544.
+2026-07-25 15:30:12 - [generation_service.py] - INFO - Routing Decision: RAG
+2026-07-25 15:30:14 - [generation_service.py] - INFO - Query Expanded with Synonyms: Lender, creditor, financier, moneylender, disbursing party, payor, paymaster, provider of funds, source of funds, provider of capital, source of capital, investor, investor in loan, investor in debt, investor in credit, investor in capital, provider of loan, provider of credit, provider of debt, provider of capital, source of loan, source of credit, source of debt, source of capital, capital provider, credit provider, debt provider, loan provider, financier of loan, financier of debt, financier of credit, financier of capital, investor in loan, investor in debt, investor in credit, investor in capital, provider of loan, provider of credit, provider of debt, provider of capital, source of loan, source of credit, source of debt, source of capital, capital provider, credit provider, debt provider, loan provider, financier of loan, financier of debt, financier of credit, financier of capital, investor in loan, investor in debt, investor in credit, investor in capital, provider of loan, provider of credit, provider of debt, provider of capital, source of loan, source of credit, source of debt, source of capital, capital provider, credit provider, debt provider, loan provider, financier of loan, financier of debt, financier of credit, financier of capital, investor in loan, investor in debt, investor in credit, investor in capital, provider of loan, provider of credit, provider of debt, provider of capital, source of loan, source of credit, source of debt, source of capital, capital provider, credit provider, debt provider, loan provider, financier of loan, financier of debt, financier of credit, financier of capital, investor in loan, investor in debt, investor in credit, investor in capital, provider of loan, provider of credit, provider of debt, provider of capital, source of loan, source of credit, source of debt, source of capital, capital provider, credit provider, debt provider, loan provider, financier of loan, financier of debt, financier of credit, financier of capital, investor in loan, investor in debt, investor in credit, investor in capital, provider of loan, provider of credit, provider of debt, provider of capital, source of loan, source of credit, source of debt, source of capital, capital provider, credit provider, debt provider, loan provider, financier of loan, financier of debt, financier of credit, financier of capital, investor in loan, investor in debt, investor in credit, investor in capital, provider of loan, provider of credit, provider of debt, provider of capital, source of loan, source of credit, source of debt, source of capital, capital provider, credit provider, debt provider, loan provider, financier of loan, financier of debt, financier of credit, financier of capital, investor in loan, investor in debt, investor in credit, investor in capital, provider of loan, provider of credit, provider of debt, provider of capital, source of loan, source of credit, source of debt, source of capital, capital provider, credit provider, debt provider, loan provider, financier of loan, financier of debt, financier of credit, financier of capital, investor in loan, investor in debt, investor in credit, investor in capital, provider of loan, provider of credit, provider of debt, provider of capital, source of loan, source of credit, source of debt, source of capital, capital provider, credit provider, debt provider, loan provider, financier of loan, financier of debt, financier of credit, financier of capital, investor in loan, investor in debt, investor in credit, investor in capital, provider of loan, provider of credit, provider of debt, provider of capital, source of loan, source of credit, source of debt, source of capital, capital provider, credit provider, debt provider, loan provider, financier of loan, financier of debt, financier of credit, financier of capital, investor in loan, investor in debt, investor in credit, investor in capital, provider of loan, provider of credit, provider of debt, provider of capital, source of loan, source of credit, source of debt, source of capital, capital provider, credit provider, debt provider, loan provider, financier of loan, financier of debt, financier of credit, financier of capital, investor in loan, investor in debt, investor in credit, investor in capital, provider of loan, provider of credit, provider of debt, provider of capital, source of loan, source of credit, source of debt, source of capital, capital provider, credit provider, debt provider, loan provider, financier of loan, financier of debt, financier of credit, financier of capital, investor in loan, investor in debt, investor in credit, investor in capital, provider of loan, provider of credit, provider of debt, provider of capital, source of loan, source of credit, source of debt, source of capital, capital provider, credit provider, debt provider, loan provider, financier of loan, financier of debt, financier of credit, financier of capital, investor in loan, investor in debt, investor in credit, investor in capital, provider of loan, provider of credit, provider of debt, provider of capital, source of loan, source of credit, source of debt, source of capital, capital provider, credit provider, debt provider, loan provider, financier of loan, financier of debt, financier of credit, financier of capital, investor in loan, investor in debt, investor in credit, investor in capital, provider of loan, provider of credit, provider of debt, provider of capital, source of loan, source of credit, source of debt, source of capital, capital provider, credit provider, debt provider, loan provider, financier of loan, financier of debt, financier of credit, financier of capital, investor in loan, investor in debt, investor in credit, investor in capital, provider of loan, provider of credit, provider of debt, provider of capital, source of loan, source of credit, source of debt, source of capital, capital provider, credit provider, debt provider, loan provider, financier of loan, financier of debt, financier of credit, financier of capital, investor in loan, investor in debt, investor in credit, investor in capital, provider of loan, provider of credit, provider of debt, provider of capital, source of loan, source of credit, source of debt, source of capital, capital provider, credit provider, debt provider, loan provider, financier of loan, financier of debt, financier of credit, financier of capital, investor in loan, investor in debt, investor in credit, investor in capital, provider of loan, provider of credit, provider of debt, provider of capital, source of loan, source of credit, source of debt, source of capital, capital provider, credit provider, debt provider, loan provider, financier of loan, financier of debt, financier of credit, financier of capital, investor in loan, investor in debt, investor in credit, investor in capital, provider of loan, provider of credit, provider of debt, provider of capital, source of loan, source of credit, source of debt, source of capital, capital provider, credit provider, debt provider, loan provider, financier of loan, financier of debt, financier of credit, financier of capital, investor in loan, investor in debt, investor in credit, investor in capital, provider of loan, provider of credit, provider of debt, provider of capital, source of loan, source of credit, source of debt, source of capital, capital provider, credit provider, debt provider, loan provider, financier of loan, financier of debt, financier of credit, financier of capital, investor in loan, investor in debt, investor in credit, investor in capital, provider of loan, provider of credit, provider of debt, provider of capital, source of loan, source of credit, source of debt, source of capital, capital provider, credit provider, debt provider, loan provider, financier of loan, financier of debt, financier of credit, financier of capital, investor in loan, investor in debt, investor in credit, investor in capital, provider of loan, provider of credit, provider of debt, provider of capital, source of loan, source of credit, source of debt, source of capital, capital provider, credit provider, debt provider, loan provider, financier of loan, financier of debt, financier of credit, financier of capital, investor in loan, investor in debt, investor in credit, investor in capital, provider of loan, provider of credit, provider of debt, provider of capital, source of loan, source of credit, source of debt, source of capital, capital provider, credit provider, debt provider, loan provider, financier of loan, financier of debt, financier of credit, financier of capital, investor in loan, investor in debt, investor in credit, investor in capital, provider of loan, provider of credit, provider of debt, provider of capital, source of loan, source of credit, source of debt, source of capital, capital provider, credit provider, debt provider, loan provider, financier of loan, financier of debt, financier of credit, financier of capital, investor in loan, investor in debt, investor in credit, investor in capital, provider of loan, provider of credit, provider of debt, provider of capital, source of loan, source of credit, source of debt, source of capital, capital provider, credit provider, debt provider, loan provider, financier of loan, financier of debt, financier of credit, financier of capital, investor in loan, investor in debt, investor in credit, investor in capital, provider of loan, provider of credit, provider of debt, provider of capital, source of loan, source of credit, source of debt, source of capital, capital provider, credit provider, debt provider, loan provider, financier of loan, financier of debt, financier of credit, financier of capital, investor in loan, investor in debt, investor in credit, investor in capital, provider of loan, provider of credit, provider of debt, provider of capital,
+2026-07-25 15:30:15 - [generation_service.py] - INFO - Multi-queries generated: ['What are the obligor and obligee of the loan facility, and what is the applicable interest rate on the loan?', 'What are the principal parties involved in the loan agreement, namely the lender and borrower, and what is the prevailing interest rate on the loan?', 'What are the identities of the obligor and obligee in the loan transaction, and what is the current interest rate applicable to the loan?']
+2026-07-25 15:30:52 - [generation_service.py] - INFO - Synthesizing response for session: 1_1784907425544 using DB history...
+2026-07-25 15:30:59 - [evaluation_service.py] - INFO - Initiating RAGAS evaluation for query: 'Who are the lender and borrower of loan and what is the interest rate on loan?'...
+2026-07-25 15:33:13 - [evaluation_service.py] - INFO - 
+============================================================
+2026-07-25 15:33:13 - [evaluation_service.py] - INFO - 📊 RAGAS LIVE EVALUATION SCORECARD 📊
+2026-07-25 15:33:13 - [evaluation_service.py] - INFO - Query: Who are the lender and borrower of loan and what is the interest rate on loan?
+2026-07-25 15:33:13 - [evaluation_service.py] - INFO - ------------------------------------------------------------
+2026-07-25 15:33:13 - [evaluation_service.py] - ERROR - Ragas Evaluation Failed: unsupported format string passed to list.__format__
+Traceback (most recent call last):
+  File "D:\Projects\Main\rag-retrieval-optimization\backend\services\evaluation_service.py", line 69, in run_ragas_evaluation
+    logger.info(f"Faithfulness       (0-1): {faith_score:.4f}")
+                                            ^^^^^^^^^^^^^^^^^
+TypeError: unsupported format string passed to list.__format__
+2026-07-25 15:39:38 - [retrieval_service.py] - INFO - Loading CrossEncoder Re-ranker into memory...
+2026-07-25 15:40:44 - [retrieval_service.py] - INFO - Loading CrossEncoder Re-ranker into memory...
+2026-07-25 15:42:59 - [generation_service.py] - INFO - Routing Decision: RAG
+2026-07-25 15:43:00 - [generation_service.py] - INFO - Query Expanded with Synonyms: Equated Monthly Installment, Monthly Repayment Amount, Monthly Installment Payment, Monthly Amortization Payment, Monthly Loan Repayment.
+2026-07-25 15:43:01 - [generation_service.py] - INFO - Multi-queries generated: ['What is the monthly installment amount?', 'What is the periodic payment amount for an EMI?', 'What is the amount of the monthly equivalent installment?']
+2026-07-25 15:43:01 - [retrieval_service.py] - WARNING - RAM is empty for 1_1784907425544! Recovering all documents from Qdrant...
+2026-07-25 15:43:06 - [retrieval_service.py] - INFO - Successfully recovered 1 documents for session 1_1784907425544.
+2026-07-25 15:43:55 - [generation_service.py] - INFO - Synthesizing response for session: 1_1784907425544 using DB history...
+2026-07-25 15:44:02 - [evaluation_service.py] - INFO - Initiating RAGAS evaluation for query: 'What is emi amount?'...
+2026-07-25 15:45:16 - [evaluation_service.py] - INFO - 
+============================================================
+2026-07-25 15:45:16 - [evaluation_service.py] - INFO - 📊 RAGAS LIVE EVALUATION SCORECARD 📊
+2026-07-25 15:45:16 - [evaluation_service.py] - INFO - Query: What is emi amount?
+2026-07-25 15:45:16 - [evaluation_service.py] - INFO - ------------------------------------------------------------
+2026-07-25 15:45:16 - [evaluation_service.py] - ERROR - Ragas Evaluation Failed: unsupported format string passed to list.__format__
+Traceback (most recent call last):
+  File "D:\Projects\Main\rag-retrieval-optimization\backend\services\evaluation_service.py", line 69, in run_ragas_evaluation
+    logger.info(f"Faithfulness       (0-1): {faith_score:.4f}")
+                                            ^^^^^^^^^^^^^^^^^
+TypeError: unsupported format string passed to list.__format__
+2026-07-25 15:45:23 - [generation_service.py] - INFO - Routing Decision: RAG
+2026-07-25 15:45:23 - [generation_service.py] - INFO - Query Expanded with Synonyms: Equated Monthly Installment, Monthly Repayment Amount, Monthly Amortization Payment, Monthly Loan Repayment, Final Repayment Date, Maturity Date, Loan Repayment Deadline, Last Payment Due Date
+2026-07-25 15:45:23 - [generation_service.py] - INFO - Multi-queries generated: ['What is the monthly equivalent installment (EMI) amount on a loan and the final repayment date?', 'What is the monthly equivalent installment (EMI) amount on a loan and the last scheduled repayment date?', 'What is the monthly equivalent installment (EMI) amount on a loan and the maturity date for repayment?', 'What is the monthly equivalent installment (EMI) amount on a loan and the final repayment due date?', 'What is the monthly equivalent installment (EMI) amount on a loan and the last repayment date?']
+2026-07-25 15:45:39 - [generation_service.py] - INFO - Synthesizing response for session: 1_1784907425544 using DB history...
+2026-07-25 15:45:43 - [evaluation_service.py] - INFO - Initiating RAGAS evaluation for query: 'What is EMI amount on loan and last date to repay it?'...
+2026-07-25 15:46:36 - [evaluation_service.py] - INFO - 
+============================================================
+2026-07-25 15:46:36 - [evaluation_service.py] - INFO - 📊 RAGAS LIVE EVALUATION SCORECARD 📊
+2026-07-25 15:46:36 - [evaluation_service.py] - INFO - Query: What is EMI amount on loan and last date to repay it?
+2026-07-25 15:46:36 - [evaluation_service.py] - INFO - ------------------------------------------------------------
+2026-07-25 15:46:36 - [evaluation_service.py] - ERROR - Ragas Evaluation Failed: unsupported format string passed to list.__format__
+Traceback (most recent call last):
+  File "D:\Projects\Main\rag-retrieval-optimization\backend\services\evaluation_service.py", line 69, in run_ragas_evaluation
+    logger.info(f"Faithfulness       (0-1): {faith_score:.4f}")
+                                            ^^^^^^^^^^^^^^^^^
+TypeError: unsupported format string passed to list.__format__
+2026-07-25 15:53:13 - [retrieval_service.py] - INFO - Loading CrossEncoder Re-ranker into memory...
+2026-07-25 17:42:28 - [retrieval_service.py] - INFO - Loading CrossEncoder Re-ranker into memory...
+2026-07-25 17:47:01 - [generation_service.py] - INFO - Routing Decision: RAG
+2026-07-25 17:47:01 - [generation_service.py] - INFO - Query Expanded with Synonyms: Outstanding principal balance, residual loan balance, remaining loan principal, net loan liability, principal loan amount.
+2026-07-25 17:47:01 - [generation_service.py] - INFO - Multi-queries generated: ['What is the outstanding principal balance of the loan?', 'What is the total loan principal amount outstanding?', 'What is the net principal amount of the loan?']
+2026-07-25 17:47:01 - [retrieval_service.py] - WARNING - RAM is empty for 1_1784907425544! Recovering all documents from Qdrant...
+2026-07-25 17:47:03 - [retrieval_service.py] - INFO - Successfully recovered 1 documents for session 1_1784907425544.
+2026-07-25 17:47:21 - [generation_service.py] - INFO - Synthesizing response for session: 1_1784907425544 using DB history...
+2026-07-25 17:47:25 - [evaluation_service.py] - INFO - Initiating RAGAS evaluation for query: 'What is the net loan amount?'...
+2026-07-25 17:47:53 - [evaluation_service.py] - INFO - 
+============================================================
+2026-07-25 17:47:53 - [evaluation_service.py] - INFO - 📊 RAGAS LIVE EVALUATION SCORECARD 📊
+2026-07-25 17:47:53 - [evaluation_service.py] - INFO - Query: What is the net loan amount?
+2026-07-25 17:47:53 - [evaluation_service.py] - INFO - ------------------------------------------------------------
+2026-07-25 17:47:53 - [evaluation_service.py] - INFO - Faithfulness       (0-1): 1.0000
+2026-07-25 17:47:53 - [evaluation_service.py] - INFO - Answer Relevancy   (0-1): 0.6971
+2026-07-25 17:47:53 - [evaluation_service.py] - INFO - ============================================================
+
+2026-07-25 18:02:42 - [generation_service.py] - INFO - Routing Decision: RAG
+2026-07-25 18:02:42 - [generation_service.py] - INFO - Query Expanded with Synonyms: Equated Monthly Installment, Monthly Repayment Amount, Monthly Installment Payment, Monthly Amortization Payment, Monthly Loan Repayment.
+2026-07-25 18:02:42 - [generation_service.py] - INFO - Multi-queries generated: ['What is the monthly installments amount for a loan?', 'What is the periodic payment amount for an installment loan?', 'What is the regular monthly payment amount for an amortizing loan?']
+2026-07-25 18:02:53 - [generation_service.py] - INFO - Synthesizing response for session: 1_1784907425544 using DB history...
+2026-07-25 18:02:56 - [evaluation_service.py] - INFO - Initiating RAGAS evaluation for query: 'What is EMI amount?'...
+2026-07-25 18:03:36 - [evaluation_service.py] - INFO - 
+============================================================
+2026-07-25 18:03:36 - [evaluation_service.py] - INFO - 📊 RAGAS LIVE EVALUATION SCORECARD 📊
+2026-07-25 18:03:36 - [evaluation_service.py] - INFO - Query: What is EMI amount?
+2026-07-25 18:03:36 - [evaluation_service.py] - INFO - ------------------------------------------------------------
+2026-07-25 18:03:36 - [evaluation_service.py] - INFO - Faithfulness       (0-1): 1.0000
+2026-07-25 18:03:36 - [evaluation_service.py] - INFO - Answer Relevancy   (0-1): nan
+2026-07-25 18:03:36 - [evaluation_service.py] - INFO - ============================================================
+
+2026-07-25 18:36:36 - [generation_service.py] - INFO - Routing Decision: RAG
+2026-07-25 18:36:37 - [generation_service.py] - INFO - Query Expanded with Synonyms: Key data, vital details, crucial information, essential particulars, significant facts.
+2026-07-25 18:36:37 - [generation_service.py] - INFO - Multi-queries generated: ['What key data points are presented within the document?', 'What salient details are contained within the document?', 'What pertinent information is disclosed in the document?']
+2026-07-25 18:36:48 - [generation_service.py] - INFO - Synthesizing response for session: 1_1784907425544 using DB history...
+2026-07-25 18:36:52 - [evaluation_service.py] - INFO - Initiating RAGAS evaluation for query: 'What is the important information given in the document?'...
+2026-07-25 18:38:14 - [evaluation_service.py] - INFO - 
+============================================================
+2026-07-25 18:38:14 - [evaluation_service.py] - INFO - 📊 RAGAS LIVE EVALUATION SCORECARD 📊
+2026-07-25 18:38:14 - [evaluation_service.py] - INFO - Query: What is the important information given in the document?
+2026-07-25 18:38:14 - [evaluation_service.py] - INFO - ------------------------------------------------------------
+2026-07-25 18:38:14 - [evaluation_service.py] - INFO - Faithfulness       (0-1): 1.0000
+2026-07-25 18:38:14 - [evaluation_service.py] - INFO - Answer Relevancy   (0-1): 0.8352
+2026-07-25 18:38:14 - [evaluation_service.py] - INFO - ============================================================
+
+2026-07-25 18:41:06 - [generation_service.py] - INFO - Routing Decision: RAG
+2026-07-25 18:41:06 - [generation_service.py] - INFO - Query Expanded with Synonyms: Short-term loan duration, Medium-term loan tenure, Long-term loan period, Extended loan repayment period, Prolonged loan amortization schedule.
+2026-07-25 18:41:06 - [generation_service.py] - INFO - Multi-queries generated: ['Maturity Period of Loan Facility in Years', 'What is the duration of the loan amortization schedule in years?', 'What is the term of the loan obligation in years?', 'What is the loan tenor in years?']
+2026-07-25 18:41:18 - [generation_service.py] - INFO - Synthesizing response for session: 1_1784907425544 using DB history...
+2026-07-25 18:41:21 - [evaluation_service.py] - INFO - Initiating RAGAS evaluation for query: 'What is the tenure of loan in years?'...
+2026-07-25 18:41:57 - [evaluation_service.py] - INFO - 
+============================================================
+2026-07-25 18:41:57 - [evaluation_service.py] - INFO - 📊 RAGAS LIVE EVALUATION SCORECARD 📊
+2026-07-25 18:41:57 - [evaluation_service.py] - INFO - Query: What is the tenure of loan in years?
+2026-07-25 18:41:57 - [evaluation_service.py] - INFO - ------------------------------------------------------------
+2026-07-25 18:41:57 - [evaluation_service.py] - INFO - Faithfulness       (0-1): 0.2500
+2026-07-25 18:41:57 - [evaluation_service.py] - INFO - Answer Relevancy   (0-1): 0.8204
+2026-07-25 18:41:57 - [evaluation_service.py] - INFO - ============================================================
+
+2026-07-25 18:45:22 - [generation_service.py] - INFO - Routing Decision: RAG
+2026-07-25 18:45:22 - [generation_service.py] - INFO - Query Expanded with Synonyms: Subprime borrower, high-risk borrower, credit-challenged borrower, low-credit-score borrower, non-prime borrower.
+2026-07-25 18:45:23 - [generation_service.py] - INFO - Multi-queries generated: ["What if a borrower's creditworthiness rating falls below the threshold of 720?", "What if a borrower's credit score is less than 720?", "What if a borrower's credit standing is below the benchmark of 720?"]
+2026-07-25 18:45:34 - [generation_service.py] - INFO - Synthesizing response for session: 1_1784907425544 using DB history...
+2026-07-25 18:45:37 - [evaluation_service.py] - INFO - Initiating RAGAS evaluation for query: 'What if borrowers credit score is below 720?'...
+2026-07-25 18:46:33 - [evaluation_service.py] - INFO - 
+============================================================
+2026-07-25 18:46:33 - [evaluation_service.py] - INFO - 📊 RAGAS LIVE EVALUATION SCORECARD 📊
+2026-07-25 18:46:33 - [evaluation_service.py] - INFO - Query: What if borrowers credit score is below 720?
+2026-07-25 18:46:33 - [evaluation_service.py] - INFO - ------------------------------------------------------------
+2026-07-25 18:46:33 - [evaluation_service.py] - INFO - Faithfulness       (0-1): 0.8000
+2026-07-25 18:46:33 - [evaluation_service.py] - INFO - Answer Relevancy   (0-1): 0.6640
+2026-07-25 18:46:33 - [evaluation_service.py] - INFO - ============================================================
+
+2026-07-25 18:47:59 - [generation_service.py] - INFO - Routing Decision: RAG
+2026-07-25 18:47:59 - [generation_service.py] - INFO - Query Expanded with Synonyms: court fees, legal charges, litigation expenses, tribunal fees, judicial costs
+2026-07-25 18:47:59 - [generation_service.py] - INFO - Multi-queries generated: ['I am encountering a fee of 1750 rupees, can you provide a detailed explanation of the associated charges?', 'I am experiencing a fee of 1750 rupees, can you elucidate the particulars of the applicable charges?', 'I am being assessed a fee of 1750 rupees, can you furnish a comprehensive breakdown of the associated expenses?']
+2026-07-25 18:48:10 - [generation_service.py] - INFO - Synthesizing response for session: 1_1784907425544 using DB history...
+2026-07-25 18:48:14 - [evaluation_service.py] - INFO - Initiating RAGAS evaluation for query: 'I am seeing 1750rs fees, can you tell me what is it about?'...
+2026-07-25 18:51:29 - [evaluation_service.py] - INFO - 
+============================================================
+2026-07-25 18:51:29 - [evaluation_service.py] - INFO - 📊 RAGAS LIVE EVALUATION SCORECARD 📊
+2026-07-25 18:51:29 - [evaluation_service.py] - INFO - Query: I am seeing 1750rs fees, can you tell me what is it about?
+2026-07-25 18:51:29 - [evaluation_service.py] - INFO - ------------------------------------------------------------
+2026-07-25 18:51:29 - [evaluation_service.py] - INFO - Faithfulness       (0-1): nan
+2026-07-25 18:51:29 - [evaluation_service.py] - INFO - Answer Relevancy   (0-1): nan
+2026-07-25 18:51:29 - [evaluation_service.py] - INFO - ============================================================
+
+2026-07-25 22:29:53 - [retrieval_service.py] - INFO - Loading CrossEncoder Re-ranker into memory...
+2026-07-25 23:02:09 - [auth.py] - INFO - Login attempt for: prakash@gmail.com
+2026-07-25 23:03:04 - [generation_service.py] - INFO - Routing Decision: RAG
+2026-07-25 23:03:05 - [generation_service.py] - INFO - Query Expanded with Synonyms: Fixed-term contract, contractual obligation, binding agreement, legally enforceable commitment, contractual lockout period.
+2026-07-25 23:03:05 - [generation_service.py] - INFO - Multi-queries generated: ['What is the definition of a lock-in period in the context of financial instruments?', 'What is the duration of the lock-in period applicable to investment products?', 'What is the lock-in period specified in the terms and conditions of a financial instrument?']
+2026-07-25 23:03:05 - [retrieval_service.py] - WARNING - RAM is empty for 1_1785000734275! Recovering all documents from Qdrant...
+2026-07-25 23:03:07 - [chat.py] - ERROR - ❌ [QUERY FAILED]: No documents found for this session. Please upload a document first.
+Traceback (most recent call last):
+  File "D:\Projects\Main\rag-retrieval-optimization\backend\api\routers\chat.py", line 73, in search_query
+    final_answer, best_chunks, routed_via, synonyms = await run_finai_pipeline(
+                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\Main\rag-retrieval-optimization\backend\RAG312\Lib\site-packages\agentlens_sdk\instrumentation.py", line 48, in async_wrapper
+    raise e # Re-raise so the agent fails naturally
+    ^^^^^^^
+  File "D:\Projects\Main\rag-retrieval-optimization\backend\RAG312\Lib\site-packages\agentlens_sdk\instrumentation.py", line 38, in async_wrapper
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\Main\rag-retrieval-optimization\backend\api\routers\chat.py", line 39, in run_finai_pipeline
+    best_chunks = await retrieval_service.execute_hybrid_search(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\Main\rag-retrieval-optimization\backend\RAG312\Lib\site-packages\agentlens_sdk\instrumentation.py", line 48, in async_wrapper
+    raise e # Re-raise so the agent fails naturally
+    ^^^^^^^
+  File "D:\Projects\Main\rag-retrieval-optimization\backend\RAG312\Lib\site-packages\agentlens_sdk\instrumentation.py", line 38, in async_wrapper
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\Main\rag-retrieval-optimization\backend\services\retrieval_service.py", line 110, in execute_hybrid_search
+    raise ValueError("No documents found for this session. Please upload a document first.")
+ValueError: No documents found for this session. Please upload a document first.
+2026-07-25 23:11:57 - [retrieval_service.py] - INFO - Loading CrossEncoder Re-ranker into memory...
+2026-07-25 23:17:01 - [generation_service.py] - INFO - Routing Decision: RAG
+2026-07-25 23:17:01 - [generation_service.py] - INFO - Query Expanded with Synonyms: Payment default, delayed payment, overdue payment, payment arrears, delayed remittance.
+2026-07-25 23:17:01 - [generation_service.py] - INFO - Multi-queries generated: ['What if payment delayed due to unforeseen circumstances?', 'What if payment is delayed due to unforeseen circumstances?', 'What if payment delay occurs due to unforeseen circumstances?', 'What if payment is delayed due to unforeseen circumstances resulting in potential late fees and penalties?', 'What if payment delay occurs due to unforeseen circumstances resulting in potential late fees and penalties?', 'What if delayed payment occurs due to unforeseen circumstances resulting in potential late fees and penalties?']
+2026-07-25 23:17:01 - [retrieval_service.py] - WARNING - RAM is empty for 1_1785000734275! Recovering all documents from Qdrant...
+2026-07-25 23:17:02 - [chat.py] - ERROR - ❌ [QUERY FAILED]: No documents found for this session. Please upload a document first.
+Traceback (most recent call last):
+  File "D:\Projects\Main\rag-retrieval-optimization\backend\api\routers\chat.py", line 73, in search_query
+    final_answer, best_chunks, routed_via, synonyms = await run_finai_pipeline(
+                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\Main\rag-retrieval-optimization\backend\RAG312\Lib\site-packages\agentlens_sdk\instrumentation.py", line 48, in async_wrapper
+    raise e # Re-raise so the agent fails naturally
+    ^^^^^^^
+  File "D:\Projects\Main\rag-retrieval-optimization\backend\RAG312\Lib\site-packages\agentlens_sdk\instrumentation.py", line 38, in async_wrapper
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\Main\rag-retrieval-optimization\backend\api\routers\chat.py", line 39, in run_finai_pipeline
+    best_chunks = await retrieval_service.execute_hybrid_search(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\Main\rag-retrieval-optimization\backend\RAG312\Lib\site-packages\agentlens_sdk\instrumentation.py", line 48, in async_wrapper
+    raise e # Re-raise so the agent fails naturally
+    ^^^^^^^
+  File "D:\Projects\Main\rag-retrieval-optimization\backend\RAG312\Lib\site-packages\agentlens_sdk\instrumentation.py", line 38, in async_wrapper
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\Main\rag-retrieval-optimization\backend\services\retrieval_service.py", line 110, in execute_hybrid_search
+    raise ValueError("No documents found for this session. Please upload a document first.")
+ValueError: No documents found for this session. Please upload a document first.
+2026-07-25 23:17:33 - [documents.py] - INFO - 📥 [UPLOAD START] Receiving file: loan2.txt
+2026-07-25 23:17:33 - [chunking.py] - INFO - Extracting text and tables using Unstructured (hi_res mode) in background thread...
+2026-07-25 23:17:40 - [chunking.py] - INFO - Chunking text using SentenceSplitter...
+2026-07-25 23:17:44 - [retrieval_service.py] - INFO - Memory index appended with 'loan2.txt' (1 chunks) for 1_1785000734275.
+2026-07-25 23:18:17 - [generation_service.py] - INFO - Routing Decision: RAG
+2026-07-25 23:18:17 - [generation_service.py] - INFO - Query Expanded with Synonyms: Delayed payment, overdue payment, late payment, payment default, payment arrears.
+2026-07-25 23:18:17 - [generation_service.py] - INFO - Multi-queries generated: ['What if payment delayed?', 'What are the implications of a delayed payment?', 'What are the consequences of a delayed payment transaction?', 'What are the repercussions of a delayed payment settlement?', 'What are the effects of a delayed payment clearance?', 'What are the outcomes of a delayed payment processing?']
+2026-07-25 23:18:33 - [generation_service.py] - INFO - Synthesizing response for session: 1_1785000734275 using DB history...
+2026-07-25 23:18:36 - [evaluation_service.py] - INFO - Initiating RAGAS evaluation for query: 'What if payment delayed?'...
+2026-07-25 23:21:24 - [evaluation_service.py] - INFO - 
+============================================================
+2026-07-25 23:21:24 - [evaluation_service.py] - INFO - 📊 RAGAS LIVE EVALUATION SCORECARD 📊
+2026-07-25 23:21:24 - [evaluation_service.py] - INFO - Query: What if payment delayed?
+2026-07-25 23:21:24 - [evaluation_service.py] - INFO - ------------------------------------------------------------
+2026-07-25 23:21:24 - [evaluation_service.py] - INFO - Faithfulness       (0-1): 1.0000
+2026-07-25 23:21:24 - [evaluation_service.py] - INFO - Answer Relevancy   (0-1): 0.7710
+2026-07-25 23:21:24 - [evaluation_service.py] - INFO - ============================================================
+
+2026-07-25 23:22:00 - [generation_service.py] - INFO - Routing Decision: RAG
+2026-07-25 23:22:01 - [generation_service.py] - INFO - Query Expanded with Synonyms: Fixed-term contract, contractual obligation, binding agreement, statutory restraint, restrictive covenant.
+2026-07-25 23:22:01 - [generation_service.py] - INFO - Multi-queries generated: ['What is the definition of a lock-in period in the context of financial instruments?', 'What is the duration of a lock-in period in banking and financial regulations?', 'What is the lock-in period definition in the realm of investment products and securities?']
+2026-07-25 23:22:10 - [generation_service.py] - INFO - Synthesizing response for session: 1_1785000734275 using DB history...
+2026-07-25 23:22:13 - [evaluation_service.py] - INFO - Initiating RAGAS evaluation for query: 'What is lock-in period?'...
+2026-07-25 23:25:35 - [evaluation_service.py] - INFO - 
+============================================================
+2026-07-25 23:25:35 - [evaluation_service.py] - INFO - 📊 RAGAS LIVE EVALUATION SCORECARD 📊
+2026-07-25 23:25:35 - [evaluation_service.py] - INFO - Query: What is lock-in period?
+2026-07-25 23:25:35 - [evaluation_service.py] - INFO - ------------------------------------------------------------
+2026-07-25 23:25:35 - [evaluation_service.py] - INFO - Faithfulness       (0-1): nan
+2026-07-25 23:25:35 - [evaluation_service.py] - INFO - Answer Relevancy   (0-1): nan
+2026-07-25 23:25:35 - [evaluation_service.py] - INFO - ============================================================
+
+2026-07-25 23:59:07 - [generation_service.py] - INFO - Routing Decision: CHAT
+2026-07-26 00:01:52 - [generation_service.py] - INFO - Routing Decision: RAG
+2026-07-26 00:01:52 - [generation_service.py] - INFO - Query Expanded with Synonyms: renewal period, notice period, lock-in duration, contractual tenure, minimum retention period
+2026-07-26 00:01:53 - [generation_service.py] - INFO - Multi-queries generated: ['Does this contract stipulate a 36-month lock-in period?', 'Does this agreement specify a 36-month lock-in duration?', 'Does this agreement stipulate a 36-month lock-in term?']
+2026-07-26 00:02:02 - [generation_service.py] - INFO - Synthesizing response for session: 1_1785000734275 using DB history...
+2026-07-26 00:02:06 - [evaluation_service.py] - INFO - Initiating RAGAS evaluation for query: 'Does this agreement says 36 months of lock-in period?'...
+2026-07-26 00:03:03 - [generation_service.py] - INFO - Routing Decision: RAG
+2026-07-26 00:03:03 - [generation_service.py] - INFO - Query Expanded with Synonyms: Total loan amount is 85 lakhs, total loan sum is 85 lakhs, total loan principal is 85 lakhs, total loan amount outstanding is 85 lakhs, total loan principal amount is 85 lakhs.
+2026-07-26 00:03:03 - [generation_service.py] - INFO - Multi-queries generated: ['The total loan amount is eighty-five lakhs.', 'The aggregate loan principal is eighty-five lakhs.', 'What is the total value of the loan outstanding at eighty-five lakhs?', 'Is the total loan amount eighty-five lakhs?', 'The total loan principal is eighty-five lakhs.', 'The loan amount outstanding is eighty-five lakhs.', 'The total loan amount due is eighty-five lakhs.']
+2026-07-26 00:03:12 - [generation_service.py] - INFO - Synthesizing response for session: 1_1785000734275 using DB history...
+2026-07-26 00:03:14 - [evaluation_service.py] - INFO - Initiating RAGAS evaluation for query: 'Total loan amount is 85 lakhs?'...
+2026-07-26 00:03:59 - [generation_service.py] - INFO - Routing Decision: RAG
+2026-07-26 00:03:59 - [generation_service.py] - INFO - Query Expanded with Synonyms: Lender name Omega Finance Capital Ltd, can be referred to as, 
+Omega Finance Capital Ltd, Omega Finance Capital Private Limited, Omega Finance Capital Limited, Omega Finance Capital Private Company, Omega Finance Capital Private Company Ltd.
+2026-07-26 00:04:00 - [generation_service.py] - INFO - Multi-queries generated: ["Is the lending institution's name Omega Finance Capital Ltd?", 'Is the name of the creditor Omega Finance Capital Ltd?', 'Is the name of the lending entity Omega Finance Capital Ltd?', 'Is the name of the financier Omega Finance Capital Ltd?', 'Is the name of the moneylender Omega Finance Capital Ltd?', 'Is the name of the financial institution Omega Finance Capital Ltd?', 'Is the name of the capital provider Omega Finance Capital Ltd?', 'Is the name of the financial intermediary Omega Finance Capital Ltd?']
+2026-07-26 00:04:09 - [generation_service.py] - INFO - Synthesizing response for session: 1_1785000734275 using DB history...
+2026-07-26 00:04:12 - [evaluation_service.py] - INFO - Initiating RAGAS evaluation for query: 'Is lender name omega finance capital ltd?'...
+2026-07-26 00:04:57 - [evaluation_service.py] - INFO - 
+============================================================
+2026-07-26 00:04:57 - [evaluation_service.py] - INFO - 📊 RAGAS LIVE EVALUATION SCORECARD 📊
+2026-07-26 00:04:57 - [evaluation_service.py] - INFO - Query: Total loan amount is 85 lakhs?
+2026-07-26 00:04:57 - [evaluation_service.py] - INFO - ------------------------------------------------------------
+2026-07-26 00:04:57 - [evaluation_service.py] - INFO - Faithfulness       (0-1): nan
+2026-07-26 00:04:57 - [evaluation_service.py] - INFO - Answer Relevancy   (0-1): nan
+2026-07-26 00:04:57 - [evaluation_service.py] - INFO - ============================================================
+
+2026-07-26 00:05:10 - [evaluation_service.py] - INFO - 
+============================================================
+2026-07-26 00:05:10 - [evaluation_service.py] - INFO - 📊 RAGAS LIVE EVALUATION SCORECARD 📊
+2026-07-26 00:05:10 - [evaluation_service.py] - INFO - Query: Does this agreement says 36 months of lock-in period?
+2026-07-26 00:05:10 - [evaluation_service.py] - INFO - ------------------------------------------------------------
+2026-07-26 00:05:10 - [evaluation_service.py] - INFO - Faithfulness       (0-1): nan
+2026-07-26 00:05:10 - [evaluation_service.py] - INFO - Answer Relevancy   (0-1): nan
+2026-07-26 00:05:10 - [evaluation_service.py] - INFO - ============================================================
+
+2026-07-26 00:07:27 - [evaluation_service.py] - INFO - 
+============================================================
+2026-07-26 00:07:27 - [evaluation_service.py] - INFO - 📊 RAGAS LIVE EVALUATION SCORECARD 📊
+2026-07-26 00:07:27 - [evaluation_service.py] - INFO - Query: Is lender name omega finance capital ltd?
+2026-07-26 00:07:27 - [evaluation_service.py] - INFO - ------------------------------------------------------------
+2026-07-26 00:07:27 - [evaluation_service.py] - INFO - Faithfulness       (0-1): nan
+2026-07-26 00:07:27 - [evaluation_service.py] - INFO - Answer Relevancy   (0-1): nan
+2026-07-26 00:07:27 - [evaluation_service.py] - INFO - ============================================================
+
+2026-07-26 00:09:33 - [generation_service.py] - INFO - Routing Decision: RAG
+2026-07-26 00:09:33 - [generation_service.py] - INFO - Query Expanded with Synonyms: Due date, payment due date, monthly installment due date, payment remittance date, payment obligation date.
+2026-07-26 00:09:34 - [generation_service.py] - INFO - Multi-queries generated: ['What is the due date for monthly installment payments, specifically the eighth day of each month?', 'What is the exact date for monthly payment remittances, which falls on the eighth day of every calendar month?', 'Can you confirm the specific date for monthly payment obligations, which is the eighth day of each month?']
+2026-07-26 00:09:46 - [generation_service.py] - INFO - Synthesizing response for session: 1_1785000734275 using DB history...
+2026-07-26 00:09:49 - [evaluation_service.py] - INFO - Initiating RAGAS evaluation for query: 'Monthly payment date is 8th of every month?'...
+2026-07-26 00:13:02 - [evaluation_service.py] - INFO - 
+============================================================
+2026-07-26 00:13:02 - [evaluation_service.py] - INFO - 📊 RAGAS LIVE EVALUATION SCORECARD 📊
+2026-07-26 00:13:02 - [evaluation_service.py] - INFO - Query: Monthly payment date is 8th of every month?
+2026-07-26 00:13:02 - [evaluation_service.py] - INFO - ------------------------------------------------------------
+2026-07-26 00:13:02 - [evaluation_service.py] - INFO - Faithfulness       (0-1): nan
+2026-07-26 00:13:02 - [evaluation_service.py] - INFO - Answer Relevancy   (0-1): nan
+2026-07-26 00:13:02 - [evaluation_service.py] - INFO - ============================================================
+
+2026-07-26 00:28:44 - [generation_service.py] - INFO - Routing Decision: RAG
+2026-07-26 00:28:44 - [generation_service.py] - INFO - Query Expanded with Synonyms: Equated Monthly Installment, Monthly Repayment Amount, Monthly Installment Payment, Monthly Amortization Payment, Monthly Loan Repayment.
+2026-07-26 00:28:44 - [generation_service.py] - INFO - Multi-queries generated: ['What is the monthly equivalent amortization (MEA) amount?', 'What is the periodic equivalent installment (PEI) amount?', 'What is the monthly equivalent repayment (MER) amount?']
+2026-07-26 00:28:52 - [generation_service.py] - INFO - Synthesizing response for session: 1_1785000734275 using DB history...
+2026-07-26 00:28:55 - [evaluation_service.py] - INFO - Initiating RAGAS evaluation for query: 'What is EMI amount?'...
+2026-07-26 00:32:09 - [evaluation_service.py] - INFO - 
+============================================================
+2026-07-26 00:32:09 - [evaluation_service.py] - INFO - 📊 RAGAS LIVE EVALUATION SCORECARD 📊
+2026-07-26 00:32:09 - [evaluation_service.py] - INFO - Query: What is EMI amount?
+2026-07-26 00:32:09 - [evaluation_service.py] - INFO - ------------------------------------------------------------
+2026-07-26 00:32:09 - [evaluation_service.py] - INFO - Faithfulness       (0-1): nan
+2026-07-26 00:32:09 - [evaluation_service.py] - INFO - Answer Relevancy   (0-1): nan
+2026-07-26 00:32:09 - [evaluation_service.py] - INFO - ============================================================
+
+2026-07-26 00:33:01 - [auth.py] - INFO - Login attempt for: yash@gmail.com
+2026-07-26 00:33:25 - [documents.py] - INFO - 📥 [UPLOAD START] Receiving file: loan_part1.docx
+2026-07-26 00:33:25 - [chunking.py] - INFO - Extracting text and tables using Unstructured (hi_res mode) in background thread...
+2026-07-26 00:33:26 - [chunking.py] - INFO - Chunking text using SentenceSplitter...
+2026-07-26 00:33:29 - [retrieval_service.py] - INFO - Memory index appended with 'loan_part1.docx' (1 chunks) for 2_1785006182244.
+2026-07-26 00:33:36 - [documents.py] - INFO - 📥 [UPLOAD START] Receiving file: loan_part2.docx
+2026-07-26 00:33:36 - [chunking.py] - INFO - Extracting text and tables using Unstructured (hi_res mode) in background thread...
+2026-07-26 00:33:36 - [chunking.py] - INFO - Chunking text using SentenceSplitter...
+2026-07-26 00:33:39 - [retrieval_service.py] - INFO - Memory index appended with 'loan_part2.docx' (1 chunks) for 2_1785006182244.
+2026-07-26 00:34:30 - [generation_service.py] - INFO - Routing Decision: RAG
+2026-07-26 00:34:30 - [generation_service.py] - INFO - Query Expanded with Synonyms: financial, legal, contractual, fiscal, monetary, pecuniary, economic, statutory, regulatory, procedural, administrative, compliance, documentation, paperwork, records, filings, submissions, notifications, declarations, certifications, authentication, verification, validation, approval, authorization, endorsement, ratification, execution, signing, witnessing, notarization, legalization.
+2026-07-26 00:34:31 - [generation_service.py] - INFO - Multi-queries generated: ['What essential data points should I be aware of regarding these documents?', 'What pertinent information should I be cognizant of concerning these documents?', 'What critical details should I be informed about in relation to these documents?']
+2026-07-26 00:34:36 - [generation_service.py] - INFO - Synthesizing response for session: 2_1785006182244 using DB history...
+2026-07-26 00:34:40 - [evaluation_service.py] - INFO - Initiating RAGAS evaluation for query: 'What is key information I need to know about these documents?'...
+2026-07-26 00:36:25 - [generation_service.py] - INFO - Routing Decision: RAG
+2026-07-26 00:36:25 - [generation_service.py] - INFO - Query Expanded with Synonyms: financial, legal, contractual, fiscal, regulatory
+2026-07-26 00:36:26 - [generation_service.py] - INFO - Multi-queries generated: ['What essential data should I be aware of regarding these financial records?', 'What critical information should I consider when reviewing these documents?', 'What pertinent details should I be cognizant of in relation to these banking documents?']
+2026-07-26 00:36:34 - [generation_service.py] - INFO - Synthesizing response for session: 2_1785006182244 using DB history...
+2026-07-26 00:36:37 - [evaluation_service.py] - INFO - Initiating RAGAS evaluation for query: 'What is key information I need to know about these documents?'...
+2026-07-26 00:37:46 - [evaluation_service.py] - INFO - 
+============================================================
+2026-07-26 00:37:46 - [evaluation_service.py] - INFO - 📊 RAGAS LIVE EVALUATION SCORECARD 📊
+2026-07-26 00:37:46 - [evaluation_service.py] - INFO - Query: What is key information I need to know about these documents?
+2026-07-26 00:37:46 - [evaluation_service.py] - INFO - ------------------------------------------------------------
+2026-07-26 00:37:46 - [evaluation_service.py] - INFO - Faithfulness       (0-1): nan
+2026-07-26 00:37:46 - [evaluation_service.py] - INFO - Answer Relevancy   (0-1): nan
+2026-07-26 00:37:46 - [evaluation_service.py] - INFO - ============================================================
+
+2026-07-26 00:38:38 - [evaluation_service.py] - INFO - 
+============================================================
+2026-07-26 00:38:38 - [evaluation_service.py] - INFO - 📊 RAGAS LIVE EVALUATION SCORECARD 📊
+2026-07-26 00:38:38 - [evaluation_service.py] - INFO - Query: What is key information I need to know about these documents?
+2026-07-26 00:38:38 - [evaluation_service.py] - INFO - ------------------------------------------------------------
+2026-07-26 00:38:38 - [evaluation_service.py] - INFO - Faithfulness       (0-1): nan
+2026-07-26 00:38:38 - [evaluation_service.py] - INFO - Answer Relevancy   (0-1): nan
+2026-07-26 00:38:38 - [evaluation_service.py] - INFO - ============================================================
+
+2026-07-26 00:41:08 - [generation_service.py] - INFO - Routing Decision: RAG
+2026-07-26 00:41:09 - [generation_service.py] - INFO - Query Expanded with Synonyms: Home loan interest rate, annual percentage rate, foreclosure fee, foreclosure penalty, prepayment penalty, redemption charges, redemption penalty, or redemption fee.
+2026-07-26 00:41:09 - [generation_service.py] - INFO - Multi-queries generated: ['What is the prevailing annual interest rate and foreclosure fees?', 'What are the annual interest rates and foreclosure penalties?', 'What are the annual interest rates and foreclosure charges levied?']
+2026-07-26 00:41:17 - [generation_service.py] - INFO - Synthesizing response for session: 2_1785006182244 using DB history...
+2026-07-26 00:41:20 - [evaluation_service.py] - INFO - Initiating RAGAS evaluation for query: 'What is interest rate per. annum and foreclosure charges?'...
+2026-07-26 00:44:42 - [evaluation_service.py] - INFO - 
+============================================================
+2026-07-26 00:44:42 - [evaluation_service.py] - INFO - 📊 RAGAS LIVE EVALUATION SCORECARD 📊
+2026-07-26 00:44:42 - [evaluation_service.py] - INFO - Query: What is interest rate per. annum and foreclosure charges?
+2026-07-26 00:44:42 - [evaluation_service.py] - INFO - ------------------------------------------------------------
+2026-07-26 00:44:42 - [evaluation_service.py] - INFO - Faithfulness       (0-1): nan
+2026-07-26 00:44:42 - [evaluation_service.py] - INFO - Answer Relevancy   (0-1): nan
+2026-07-26 00:44:42 - [evaluation_service.py] - INFO - ============================================================
+

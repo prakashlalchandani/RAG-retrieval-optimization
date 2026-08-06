@@ -1,9 +1,7 @@
 import sys
 import types
-import asyncio
-from typing import Dict, Any
 
-# Bypassing the broken VertexAI dependency
+# Standard patch for Langchain/Ragas VertexAI dependency bug
 dummy_chat = types.ModuleType("langchain_community.chat_models.vertexai")
 dummy_chat.ChatVertexAI = type("ChatVertexAI", (object,), {})
 sys.modules["langchain_community.chat_models.vertexai"] = dummy_chat
@@ -11,59 +9,18 @@ sys.modules["langchain_community.chat_models.vertexai"] = dummy_chat
 from ragas import evaluate
 from ragas.metrics import faithfulness, answer_relevancy 
 from datasets import Dataset
-from langchain_groq import ChatGroq
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
-from langchain_core.outputs import ChatResult
+
+# Swapping the evaluator to Google to bypass Groq's 'n=1' limitation
+from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
 
 from config.settings import settings
 from config.logger import logger
 
-
-# --- PERMANENT FIX 1: Concurrent 'n' Simulation for Groq ---
-class SafeChatGroq(ChatGroq):
-    """
-    Groq API strictly forbids the 'n' parameter. Ragas requires 'n' for answer_relevancy.
-    This wrapper intercepts 'n', runs concurrent requests to Groq, and perfectly 
-    simulates the expected behavior by merging the ChatResults.
-    """
-    def _extract_n(self, kwargs: Dict[str, Any]) -> int:
-        n = kwargs.pop("n", 1)
-        # Langchain sometimes nests 'n' inside model_kwargs during bind()
-        if "model_kwargs" in kwargs and "n" in kwargs["model_kwargs"]:
-            n = kwargs["model_kwargs"].pop("n")
-        return n
-
-    def _generate(self, messages, stop=None, run_manager=None, **kwargs) -> ChatResult:
-        n = self._extract_n(kwargs)
-        final_result = super()._generate(messages, stop, run_manager, **kwargs)
-        
-        # Sequentially generate remaining if n > 1 (Sync mode)
-        for _ in range(n - 1):
-            extra_result = super()._generate(messages, stop, run_manager, **kwargs)
-            final_result.generations.extend(extra_result.generations)
-        return final_result
-        
-    async def _agenerate(self, messages, stop=None, run_manager=None, **kwargs) -> ChatResult:
-        n = self._extract_n(kwargs)
-        
-        # Concurrently generate 'n' requests (Async mode)
-        tasks = [super()._agenerate(messages, stop, run_manager, **kwargs) for _ in range(n)]
-        results = await asyncio.gather(*tasks)
-        
-        # Merge all generations into the first ChatResult
-        final_result = results[0]
-        for res in results[1:]:
-            final_result.generations.extend(res.generations)
-            
-        return final_result
-# -------------------------------------------------------------
-
-
-# Initialize models using our new wrapper
-eval_llm = SafeChatGroq(
-    model=settings.ROUTER_MODEL, 
+# Initialize models specifically for Ragas evaluation
+eval_llm = ChatGoogleGenerativeAI(
+    model="gemini-2.5-flash",
     temperature=0,
-    api_key=settings.GROQ_API_KEY
+    google_api_key=settings.GEMINI_API_KEY
 )
 
 eval_embeddings = GoogleGenerativeAIEmbeddings(
@@ -79,7 +36,7 @@ def run_ragas_evaluation(query: str, answer: str, contexts: list):
     data = {
         "question": [query],
         "answer": [answer],
-        "contexts": [contexts]
+        "contexts": [contexts] # This provides Ragas access to the document chunks
     }
     dataset = Dataset.from_dict(data)
     
@@ -94,12 +51,19 @@ def run_ragas_evaluation(query: str, answer: str, contexts: list):
             raise_exceptions=False 
         )
         
-        # --- PERMANENT FIX 2: Safe Result Extraction ---
-        # Convert EvaluationResult directly to a dict to bypass the 
-        # class's broken __contains__ iteration that causes KeyError: 0
-        scores = dict(result)
-        faith_score = scores.get("faithfulness", 0.0)
-        rel_score = scores.get("answer_relevancy", 0.0)
+        # Safely extract scores handling potential list returns from Ragas
+        try:
+            faith_val = result["faithfulness"]
+            # If Ragas returns a list [0.95], extract the first item. Otherwise, use the float directly.
+            faith_score = float(faith_val[0]) if isinstance(faith_val, list) else float(faith_val)
+        except (KeyError, TypeError, IndexError, ValueError):
+            faith_score = 0.0
+            
+        try:
+            rel_val = result["answer_relevancy"]
+            rel_score = float(rel_val[0]) if isinstance(rel_val, list) else float(rel_val)
+        except (KeyError, TypeError, IndexError, ValueError):
+            rel_score = 0.0
         
         logger.info("\n" + "="*60)
         logger.info("📊 RAGAS LIVE EVALUATION SCORECARD 📊")
@@ -108,6 +72,5 @@ def run_ragas_evaluation(query: str, answer: str, contexts: list):
         logger.info(f"Faithfulness       (0-1): {faith_score:.4f}")
         logger.info(f"Answer Relevancy   (0-1): {rel_score:.4f}")
         logger.info("="*60 + "\n")
-        
     except Exception as e:
-        logger.error(f"Ragas Evaluation Failed: {e}", exc_info=True)
+        logger.error(f"Error during Ragas evaluation: {e}")
